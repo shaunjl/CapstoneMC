@@ -58,10 +58,10 @@ Program Memory  [Origin = 0x200, Length = 0x155ec]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xd6           0x141  (321)
-.text                        0x2d6                0x26            0x39  (57)
-.dinit                       0x2fc                 0x2             0x3  (3)
+.text                        0x2d6                0x4a            0x6f  (111)
+.dinit                       0x320                 0x2             0x3  (3)
 
-                     Total program memory used (bytes):          0x17d  (381) <1%
+                     Total program memory used (bytes):          0x1b3  (435) <1%
 
 
 Data Memory  [Origin = 0x1000, Length = 0x4000]
@@ -89,22 +89,22 @@ External Symbols in Program Memory (by address):
                   0x000238                  __data_init
                   0x000238                  __data_init_extended
                   0x0002d2                  __DefaultInterrupt
-                  0x0002d6                  _PinConfig
-                  0x0002e2                  _AnalogConfig
-                  0x0002e8                  _TimerConfig
-                  0x0002ee                  _main
+                  0x0002d6                  _main
+                  0x000308                  _PinConfig
+                  0x000314                  _AnalogConfig
+                  0x00031a                  _TimerConfig
 
 External Symbols in Program Memory (by name):
 
-                  0x0002e2                  _AnalogConfig
-                  0x0002d6                  _PinConfig
-                  0x0002e8                  _TimerConfig
+                  0x000314                  _AnalogConfig
+                  0x000308                  _PinConfig
+                  0x00031a                  _TimerConfig
                   0x0002d2                  __DefaultInterrupt
                   0x000238                  __data_init
                   0x000238                  __data_init_extended
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0002ee                  _main
+                  0x0002d6                  _main
 
 Memory Configuration
 
@@ -210,21 +210,21 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x3ef
+.debug_info       0x000000        0x40a
  *(.debug_info)
- .debug_info      0x000000        0x207 build/default/production/main.o
- .debug_info      0x000207        0x1e8 build/default/production/configuration.o
+ .debug_info      0x000000        0x222 build/default/production/main.o
+ .debug_info      0x000222        0x1e8 build/default/production/configuration.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x11a
+.debug_abbrev     0x000000        0x134
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0x8e build/default/production/main.o
- .debug_abbrev    0x00008e         0x8c build/default/production/configuration.o
+ .debug_abbrev    0x000000         0xa8 build/default/production/main.o
+ .debug_abbrev    0x0000a8         0x8c build/default/production/configuration.o
 
-.debug_line       0x000000        0x1b7
+.debug_line       0x000000        0x1d7
  *(.debug_line)
- .debug_line      0x000000         0xc5 build/default/production/main.o
- .debug_line      0x0000c5         0xf2 build/default/production/configuration.o
+ .debug_line      0x000000         0xe5 build/default/production/main.o
+ .debug_line      0x0000e5         0xf2 build/default/production/configuration.o
 
 .debug_frame      0x000000         0x68
  *(.debug_frame)
@@ -1295,13 +1295,13 @@ __c30_signature
  __c30_signature
                   0x0000a4          0x6 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-pic30-elf.a(data_init_extendedep.o)
 
-.text             0x0002d6         0x26
- .text            0x0002d6         0x18 build/default/production/configuration.o
-                  0x0002d6                  _PinConfig
-                  0x0002e2                  _AnalogConfig
-                  0x0002e8                  _TimerConfig
- .text            0x0002ee          0xe build/default/production/main.o
-                  0x0002ee                  _main
+.text             0x0002d6         0x4a
+ .text            0x0002d6         0x32 build/default/production/main.o
+                  0x0002d6                  _main
+ .text            0x000308         0x18 build/default/production/configuration.o
+                  0x000308                  _PinConfig
+                  0x000314                  _AnalogConfig
+                  0x00031a                  _TimerConfig
 
-.dinit            0x0002fc          0x2
- .dinit           0x0002fc          0x2 data_init
+.dinit            0x000320          0x2
+ .dinit           0x000320          0x2 data_init

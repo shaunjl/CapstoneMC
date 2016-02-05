@@ -25,7 +25,18 @@ int main() {
     while(1)
     {
         LEDG = 1;
+        LEDR = 0;
+        int x;
+    /* The loop goes while x < 10, and x increases by one every loop*/
+        for ( x = 0; x < 4000; x++ ) {
+            ;
+        }
         LEDR = 1;
+        LEDG = 0;
+        for ( x = 0; x < 4000; x++ ) {
+            ;
+        }
+        
     }
     
     return (0);
