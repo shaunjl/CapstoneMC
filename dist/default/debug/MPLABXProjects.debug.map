@@ -6,7 +6,7 @@ Tool Name:
 Command:
   -p24EP128GP202 \
   -o \
-  dist/default/production/MPLABXProjects.production.elf \
+  dist/default/debug/MPLABXProjects.debug.elf \
   -L/Applications/microchip/xc16/v1.25/bin/bin/.. \
   -L/Applications/microchip/xc16/v1.25/bin/bin/../../lib \
   -L/Applications/microchip/xc16/v1.25/bin/bin/../../support/PIC24E/gld \
@@ -15,11 +15,21 @@ Command:
   -L/Applications/microchip/xc16/v1.25/bin/bin/../../support/dsPIC30F/gld \
   -L/Applications/microchip/xc16/v1.25/bin/bin/../../support/dsPIC33E/gld \
   -L/Applications/microchip/xc16/v1.25/bin/bin/../../support/dsPIC33F/gld \
-  build/default/production/main.o \
-  build/default/production/configuration.o \
+  build/default/debug/main.o \
+  build/default/debug/configuration.o \
+  -T/tmp/tmp00006e96.00 \
+  -T/tmp/tmp00006e96.01 \
+  -T/tmp/tmp00006e96.02 \
+  -T/tmp/tmp00006e96.03 \
+  -T/tmp/tmp00006e96.04 \
+  -T/tmp/tmp00006e96.05 \
+  -T/tmp/tmp00006e96.06 \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
-  -Tp24EP128GP202.gld.00 \
+  --defsym=__MPLAB_DEBUG=1 \
+  --defsym=__DEBUG=1 \
+  --defsym=__MPLAB_DEBUGGER_PK3=1 \
+  -Tp24EP128GP202.gld.07 \
   --stack=16 \
   --check-sections \
   --data-init \
@@ -31,10 +41,10 @@ Command:
   --stackguard=16 \
   --no-force-link \
   --smart-io \
-  -Map=dist/default/production/MPLABXProjects.production.map \
+  -Map=dist/default/debug/MPLABXProjects.debug.map \
   --report-mem \
   --memorysummary \
-  dist/default/production/memoryfile.xml \
+  dist/default/debug/memoryfile.xml \
   -start-group \
   --library=lega-pic30-elf \
   --library=m-elf \
@@ -50,7 +60,7 @@ Archive member included because of file (symbol)
 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-pic30-elf.a(data_init_extendedep.o)
                               /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-pic30-elf.a(crt0_extendedep.o) (__data_init_extended)
 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(printf_s.EPeo)
-                              build/default/production/main.o (__printf_0)
+                              build/default/debug/main.o (__printf_0)
 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(xprintf_s.EPeo)
                               /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(printf_s.EPeo) (___Printf_s)
 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(xputfld_s.EPeo)
@@ -119,12 +129,19 @@ Data Memory  [Origin = 0x1000, Length = 0x4000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.data                       0x1000                   0            0xa2  (162)
-.bss                        0x10a2                   0             0x6  (6)
-.data                       0x10a8                   0             0x4  (4)
-.bss                        0x10ac                   0             0x2  (2)
+reserve_data_0x1000         0x1000                0x1c            0x1c  (28)
+reserve_data_0x101c         0x101c                 0x2             0x2  (2)
+reserve_data_0x101e         0x101e                 0x2             0x2  (2)
+reserve_data_0x1020         0x1020                 0x2             0x2  (2)
+reserve_data_0x1022         0x1022                 0x2             0x2  (2)
+reserve_data_0x1024         0x1024                 0x4             0x4  (4)
+reserve_data_0x1028         0x1028                0x28            0x28  (40)
+.data                       0x1050                   0            0xa2  (162)
+.bss                        0x10f2                   0             0x6  (6)
+.data                       0x10f8                   0             0x4  (4)
+.bss                        0x10fc                   0             0x2  (2)
 
-                        Total data memory used (bytes):           0xae  (174) 1%
+                        Total data memory used (bytes):           0xfe  (254) 1%
 
 
 Dynamic Memory Usage
@@ -132,32 +149,32 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                       0x10ae                              0x3f52  (16210)
+stack                       0x10fe                              0x3f02  (16130)
 
-                        Maximum dynamic memory (bytes):         0x3f52  (16210)
+                        Maximum dynamic memory (bytes):         0x3f02  (16130)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x1000                  __Stdin
-                    0x1028                  __Stdout
-                    0x1050                  __Stderr
-                    0x1078                  __Files
-                    0x10a2                  __Aldata
-                    0x10a8                  __Size_block
-                    0x10aa                  ___C30_UART
-                    0x10ac                  ___curbrk
+                    0x1050                  __Stdin
+                    0x1078                  __Stdout
+                    0x10a0                  __Stderr
+                    0x10c8                  __Files
+                    0x10f2                  __Aldata
+                    0x10f8                  __Size_block
+                    0x10fa                  ___C30_UART
+                    0x10fc                  ___curbrk
 
 External Symbols in Data Memory (by name):
 
-                    0x10a2                  __Aldata
-                    0x1078                  __Files
-                    0x10a8                  __Size_block
-                    0x1050                  __Stderr
-                    0x1000                  __Stdin
-                    0x1028                  __Stdout
-                    0x10aa                  ___C30_UART
-                    0x10ac                  ___curbrk
+                    0x10f2                  __Aldata
+                    0x10c8                  __Files
+                    0x10f8                  __Size_block
+                    0x10a0                  __Stderr
+                    0x1050                  __Stdin
+                    0x1078                  __Stdout
+                    0x10fa                  ___C30_UART
+                    0x10fc                  ___curbrk
 
 External Symbols in Program Memory (by address):
 
@@ -256,9 +273,47 @@ FUID3            0x800ffe           0x000002
 
 Linker script and memory map
 
-LOAD build/default/production/main.o
-LOAD build/default/production/configuration.o
+LOAD build/default/debug/main.o
+LOAD build/default/debug/configuration.o
+
+reserve_data_0x1000
+                    0x1000         0x1c
+                    0x101c                  . = 0x1c
+ *fill*             0x1000         0x1c00
+
+reserve_data_0x101c
+                    0x101c          0x2
+                    0x101e                  . = 0x2
+ *fill*             0x101c          0x200
+
+reserve_data_0x101e
+                    0x101e          0x2
+                    0x1020                  . = 0x2
+ *fill*             0x101e          0x200
+
+reserve_data_0x1020
+                    0x1020          0x2
+                    0x1022                  . = 0x2
+ *fill*             0x1020          0x200
+
+reserve_data_0x1022
+                    0x1022          0x2
+                    0x1024                  . = 0x2
+ *fill*             0x1022          0x200
+
+reserve_data_0x1024
+                    0x1024          0x4
+                    0x1028                  . = 0x4
+ *fill*             0x1024          0x400
+
+reserve_data_0x1028
+                    0x1028         0x28
+                    0x1050                  . = 0x28
+ *fill*             0x1028         0x2800
                     0x0001                  __MPLAB_BUILD = 0x1
+                    0x0001                  __MPLAB_DEBUG = 0x1
+                    0x0001                  __DEBUG = 0x1
+                    0x0001                  __MPLAB_DEBUGGER_PK3 = 0x1
 LOAD p24EP128GP202
 LOAD /Applications/microchip/xc16/v1.25/bin/bin/../../lib/libfx-elf.a
                     0x157f0                  __FICD = 0x157f0
@@ -296,7 +351,7 @@ LOAD /Applications/microchip/xc16/v1.25/bin/bin/../../lib/libfx-elf.a
  *(.handle)
  .handle          0x0002d2          0xc jump_table
  *(.isr*)
- .isr.text        0x0002de         0x5e build/default/production/main.o
+ .isr.text        0x0002de         0x5e build/default/debug/main.o
                   0x0002de                  __T1Interrupt
                   0x00032e                  _main
  .isr             0x00033c          0x4 default_isr
@@ -391,7 +446,7 @@ __FOSC
 
 __FOSCSEL         0x0157f8          0x2
  *(__FOSCSEL.sec*)
- __FOSCSEL.sec    0x0157f8          0x2 build/default/production/main.o
+ __FOSCSEL.sec    0x0157f8          0x2 build/default/debug/main.o
 
 __FGS
  *(__FGS.sec*)
@@ -414,29 +469,29 @@ __FUID3
 
 .debug_info       0x000000        0xebf
  *(.debug_info)
- .debug_info      0x000000        0x39c build/default/production/main.o
- .debug_info      0x00039c        0xb23 build/default/production/configuration.o
+ .debug_info      0x000000        0x39c build/default/debug/main.o
+ .debug_info      0x00039c        0xb23 build/default/debug/configuration.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x1b5
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xa3 build/default/production/main.o
- .debug_abbrev    0x0000a3        0x112 build/default/production/configuration.o
+ .debug_abbrev    0x000000         0xa3 build/default/debug/main.o
+ .debug_abbrev    0x0000a3        0x112 build/default/debug/configuration.o
 
 .debug_line       0x000000        0x2b3
  *(.debug_line)
- .debug_line      0x000000        0x11f build/default/production/main.o
- .debug_line      0x00011f        0x194 build/default/production/configuration.o
+ .debug_line      0x000000        0x11f build/default/debug/main.o
+ .debug_line      0x00011f        0x194 build/default/debug/configuration.o
 
 .debug_frame      0x000000         0xa0
  *(.debug_frame)
- .debug_frame     0x000000         0x4c build/default/production/main.o
- .debug_frame     0x00004c         0x54 build/default/production/configuration.o
+ .debug_frame     0x000000         0x4c build/default/debug/main.o
+ .debug_frame     0x00004c         0x54 build/default/debug/configuration.o
 
 .debug_str        0x000000         0x56
  *(.debug_str)
- .debug_str       0x000000         0x13 build/default/production/main.o
- .debug_str       0x000013         0x43 build/default/production/configuration.o
+ .debug_str       0x000000         0x13 build/default/debug/main.o
+ .debug_str       0x000013         0x43 build/default/debug/configuration.o
 
 .debug_loc
  *(.debug_loc)
@@ -448,9 +503,9 @@ __FUID3
                   0x000000         0x8a
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x39 build/default/production/main.o
+                  0x000000         0x39 build/default/debug/main.o
  .debug_pubnames
-                  0x000039         0x51 build/default/production/configuration.o
+                  0x000039         0x51 build/default/debug/configuration.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -458,9 +513,9 @@ __FUID3
 .debug_aranges    0x000000         0x30
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/production/main.o
+                  0x000000         0x18 build/default/debug/main.o
  .debug_aranges
-                  0x000018         0x18 build/default/production/configuration.o
+                  0x000018         0x18 build/default/debug/configuration.o
 
 .ivt              0x000004        0x13e
                   0x000004          0x4 LONG 0x33c DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
@@ -1475,7 +1530,7 @@ LOAD /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-pic30-elf.a
 LOAD /Applications/microchip/xc16/v1.25/bin/bin/../../lib/libm-elf.a
 LOAD /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a
 END GROUP
-OUTPUT(dist/default/production/MPLABXProjects.production.elf elf32-pic30)
+OUTPUT(dist/default/debug/MPLABXProjects.debug.elf elf32-pic30)
 LOAD jump_table
 LOAD default_isr
 LOAD data_init
@@ -1483,16 +1538,16 @@ LOAD data_init
 .debug_pubtypes
                   0x000030        0x133
  .debug_pubtypes
-                  0x000030         0x4e build/default/production/main.o
+                  0x000030         0x4e build/default/debug/main.o
  .debug_pubtypes
-                  0x00007e         0xe5 build/default/production/configuration.o
+                  0x00007e         0xe5 build/default/debug/configuration.o
 
 __c30_signature
                   0x000163         0xae
  __c30_signature
-                  0x000163          0x6 build/default/production/main.o
+                  0x000163          0x6 build/default/debug/main.o
  __c30_signature
-                  0x000169          0x6 build/default/production/configuration.o
+                  0x000169          0x6 build/default/debug/configuration.o
  __c30_signature
                   0x00016f          0x6 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-pic30-elf.a(crt0_extendedep.o)
  __c30_signature
@@ -1548,37 +1603,37 @@ __c30_signature
  __c30_signature
                   0x00020b          0x6 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/libm-elf.a(mulsi3.epeo)
 
-.data               0x1000         0xa2
- .data              0x1000         0x88 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(xfiles.EPeo)
-                    0x1000                  __Stdin
-                    0x1028                  __Stdout
-                    0x1050                  __Stderr
-                    0x1078                  __Files
- .data              0x1088         0x1a /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(xprintf_s.EPeo)
+.data               0x1050         0xa2
+ .data              0x1050         0x88 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(xfiles.EPeo)
+                    0x1050                  __Stdin
+                    0x1078                  __Stdout
+                    0x10a0                  __Stderr
+                    0x10c8                  __Files
+ .data              0x10d8         0x1a /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(xprintf_s.EPeo)
 
-.bss                0x10a2          0x6
- .bss               0x10a2          0x4 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(malloc.EPeo)
-                    0x10a2                  __Aldata
- .bss               0x10a6          0x2 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(fclose.EPelo)
+.bss                0x10f2          0x6
+ .bss               0x10f2          0x4 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(malloc.EPeo)
+                    0x10f2                  __Aldata
+ .bss               0x10f6          0x2 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(fclose.EPelo)
 
-.data               0x10a8          0x4
- .data              0x10a8          0x2 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(malloc.EPeo)
-                    0x10a8                  __Size_block
- .data              0x10aa          0x2 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-pic30-elf.a(c30_uartep.Leo)
-                    0x10aa                  ___C30_UART
+.data               0x10f8          0x4
+ .data              0x10f8          0x2 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-c-elf.a(malloc.EPeo)
+                    0x10f8                  __Size_block
+ .data              0x10fa          0x2 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-pic30-elf.a(c30_uartep.Leo)
+                    0x10fa                  ___C30_UART
 
-.bss                0x10ac          0x2
- .bss               0x10ac          0x2 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-pic30-elf.a(brkep.Lelo)
-                    0x10ac                  ___curbrk
+.bss                0x10fc          0x2
+ .bss               0x10fc          0x2 /Applications/microchip/xc16/v1.25/bin/bin/../../lib/liblega-pic30-elf.a(brkep.Lelo)
+                    0x10fc                  ___curbrk
 
 .const              0x8b8a          0xa load address 0x000b8a  
- .const             0x8b8a          0xa build/default/production/main.o
+ .const             0x8b8a          0xa build/default/debug/main.o
 
 .dinit            0x000b94         0x9e
  .dinit           0x000b94         0x9e data_init
 
 .text             0x000c32         0x4e
- .text            0x000c32         0x4e build/default/production/configuration.o
+ .text            0x000c32         0x4e build/default/debug/configuration.o
                   0x000c32                  _PinConfig
                   0x000c50                  _AnalogConfig
                   0x000c56                  _TimerConfig

@@ -25,28 +25,34 @@ _FOSCSEL(FNOSC_FRC);
 #define BUT2       _RB15
 
 
+void _ISR _T1Interrupt(void)
+{
+    printf("Interrupt");
+    _T1IF = 0;
+    
+    if (LED1G == 1)
+    {
+        LED1G = 0;
+        LED1R = 1;
+    }
+    else if (LED1G == 0)
+    {
+        LED1R = 0;
+        LED1G = 1;
+    }
+}
+
 int main() {
  
     AnalogConfig();
     PinConfig();
     TimerConfig();
+    LED1G = 1;
+    LED1R = 1;
 
     while(1)
-    {
-        LED1G = 1;
-        LED1R = 0;
-        int x;
-    /* The loop goes while x < 10, and x increases by one every loop*/
-        for ( x = 0; x < 4000; x++ ) {
-            ;
-        }
-        LED1R = 1;
-        LED1G = 0;
-        for ( x = 0; x < 4000; x++ ) {
-            ;
-        }
-        
-    }
+        ;
+
     
     return (0);
 }

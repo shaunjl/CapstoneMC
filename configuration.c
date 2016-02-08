@@ -1,10 +1,3 @@
-/*
- * File:   configuration.c
- * Author: Shaun
- *
- * Created on February 1, 2016, 8:33 AM
- */
-
 #include "xc.h"
 #include "configuration.h"
 
@@ -28,7 +21,15 @@ void AnalogConfig(){
     
 }
 void TimerConfig(){
-    
+    // 16 bit counter, 8 MHz clock (4 MHz cycles)
+    // this means 2^16/(4Mhz/256)) = 4.19 seconds for all 
+    _TON = 1; //timer1 on
+    _TCKPS = 0b11; // 1 count: 256 cycles
+    _TSYNC = 0; // do not sync to external clock
+    _TCS = 0; // no external clock source
+    _T1IP = 4; // Interrupt priority
+    _T1IE = 1; // Enable interrupt
+    _T1IF = 0; // Clear interrupt flag
 }
 
 void InputConfig(){

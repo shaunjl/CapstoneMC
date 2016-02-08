@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <executable name="dist/default/production/MPLABXProjects.production.elf">
+  <executable name="dist/default/debug/MPLABXProjects.debug.elf">
     <memory name="data">
       <units>bytes</units>
       <length>16384</length>
-      <used>174</used>
-      <free>16210</free>
+      <used>254</used>
+      <free>16130</free>
     </memory>
     <memory name="program">
       <units>bytes</units>
