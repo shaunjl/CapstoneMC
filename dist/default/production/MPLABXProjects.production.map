@@ -217,10 +217,10 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000        0xef5
+.debug_info       0x000000        0xfc1
  *(.debug_info)
- .debug_info      0x000000        0x39c build/default/production/main.o
- .debug_info      0x00039c        0xb59 build/default/production/configuration.o
+ .debug_info      0x000000        0x468 build/default/production/main.o
+ .debug_info      0x000468        0xb59 build/default/production/configuration.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x1c6

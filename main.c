@@ -13,28 +13,20 @@
 // Select 8 mhz frc clock
 _FOSCSEL(FNOSC_FRC);
 //set output registers to the LEDs and input to Buttons
-#define LED1R      _RA0  
-#define LED1G      _RA1  
-#define LED2R	   _RB0
-#define LED2G	   _RB1
-#define LED3R	   _RB2
-#define LED3G	   _RB3
-#define LED4R	   _RA2
-#define LED4G	   _RA3
-#define BUT1       _RB14
-#define BUT2       _RB15
+#define LED1       _RB2  
+#define LED2	   _RB3
 
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
 {
     _T1IF = 0;
-    if (LED1R)
+    if (LED2)
     {
-        LED1R = 0;
+        LED2 = 0;
 //        LED1G = 1;
     }
     else
     {
-    LED1R = 1;
+    LED2 = 1;
     }
 }
 
@@ -43,7 +35,7 @@ int main() {
     AnalogConfig();
     PinConfig();
     TimerConfig();
-    LED1R = 1;
+    LED2 = 1;
 //    LED1G = 0;
 
     while(1)
