@@ -22,14 +22,17 @@ void AnalogConfig(){
 }
 void TimerConfig(){
     // 16 bit counter, 8 MHz clock (4 MHz cycles)
-    // this means 2^16/(4Mhz/256)) = 4.19 seconds for all 
-    _TON = 1; //timer1 on
+    // this means 2^16/(4Mhz/256)) = 4.19 seconds between interrupts 
+    _TON = 0; //timer1 off
     _TCKPS = 0b11; // 1 count: 256 cycles
+    PR1 = 65000; //number to count to
     _TSYNC = 0; // do not sync to external clock
     _TCS = 0; // no external clock source
     _T1IP = 4; // Interrupt priority
     _T1IE = 1; // Enable interrupt
     _T1IF = 0; // Clear interrupt flag
+    _TON = 1; //timer1 on
+    TMR1 = 0; // set timer1 count to 0 initially
 }
 
 void InputConfig(){

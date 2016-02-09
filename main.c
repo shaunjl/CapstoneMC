@@ -24,21 +24,17 @@ _FOSCSEL(FNOSC_FRC);
 #define BUT1       _RB14
 #define BUT2       _RB15
 
-
-void _ISR _T1Interrupt(void)
+void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
 {
-    printf("Interrupt");
     _T1IF = 0;
-    
-    if (LED1G == 1)
-    {
-        LED1G = 0;
-        LED1R = 1;
-    }
-    else if (LED1G == 0)
+    if (LED1R)
     {
         LED1R = 0;
-        LED1G = 1;
+//        LED1G = 1;
+    }
+    else
+    {
+    LED1R = 1;
     }
 }
 
@@ -47,8 +43,8 @@ int main() {
     AnalogConfig();
     PinConfig();
     TimerConfig();
-    LED1G = 1;
     LED1R = 1;
+//    LED1G = 0;
 
     while(1)
         ;
