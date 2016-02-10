@@ -20,33 +20,35 @@ _FOSCSEL(FNOSC_FRC);
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
 {
     _T1IF = 0;
-//    if (LED2)
-//    {
-//        LED2 = 0;
-////        LED1G = 1;
-//    }
-//    else
-//    {
-//    LED2 = 1;
-//    }
+   if (LED2)
+    {
+      _LATB3 = 0;
+      _LATB2 = 1;
+    }
+    else
+    {
+    _LATB2 = 0;
+    _LATB3 = 1;
+    }
 }
 
-void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void)
-{
-    _CNIF = 0;
-    if (BUT1)
-        LED1 = 1;
-    else
-        LED1 = 0;
-}
+//void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void)
+//{
+ //   _CNIF = 0;
+ //   if (BUT1)
+ //       LED1 = 1;
+  //  else
+ //       LED1 = 0;
+//}
 
 int main() {
  
-    AnalogConfig();
+    //AnalogConfig();
     PinConfig();
     TimerConfig();
-    InputConfig();
-    LED1 = 0;
+    //InputConfig();
+    _LATB3 = 0;
+    _LATB2 = 0;
 
     while(1)
         ;
