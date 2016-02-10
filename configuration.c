@@ -13,7 +13,6 @@ void PinConfig(){
     _TRISB1 = 0; //set RB1 to output
     _TRISB2 = 0; //set RB2 to output
     _TRISB3 = 0; //set RB3 to output
-    _TRISB14 = 1; //set RB14 to input
     _TRISB15 = 1; //set RB15 to input
 
 }
@@ -36,6 +35,11 @@ void TimerConfig(){
 }
 
 void InputConfig(){
-    _CNIEB14 = 1;
-
+    _CNIEB15 = 1; //Enable Change Notification bit for B15
+    _CNPUB15 = 0; //Disable pull-up resistor
+    _CNPDB15 = 0; //Disable pull-down resistor
+    _CNIP = 6; // set interrupt priority
+    _CNIF = 0; // clear interrupt flag
+    _CNIE = 1; // Enable CN interrupts
+    
 }
