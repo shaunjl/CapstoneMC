@@ -1,6 +1,7 @@
 #include "xc.h"
 #include "configuration.h"
 
+// read from the RA and RB bits but write to the LAT bits
 void PinConfig(){
     ANSELA = 0; //set all A ports to digital (turn analog off)
     ANSELB = 0; //set all B ports to digital 
@@ -13,6 +14,7 @@ void PinConfig(){
     _TRISB1 = 0; //set RB1 to output
     _TRISB2 = 0; //set RB2 to output
     _TRISB3 = 0; //set RB3 to output
+    _TRISB14 = 1; //set RB14 to input
     _TRISB15 = 1; //set RB15 to input
 
 }
@@ -24,22 +26,24 @@ void TimerConfig(){
     // this means 2^16/(4Mhz/256)) = 4.19 seconds between interrupts 
     _TON = 0; //timer1 off
     _TCKPS = 0b11; // 1 count: 256 cycles
-    PR1 = 65000; //number to count to
+    PR1 = 62500; //number to count to
     _TSYNC = 0; // do not sync to external clock
     _TCS = 0; // no external clock source
     _T1IP = 4; // Interrupt priority
-    _T1IE = 1; // Enable interrupt
+    _T1IE = 0; // Enable interrupt
     _T1IF = 0; // Clear interrupt flag
-    _TON = 1; //timer1 on
     TMR1 = 0; // set timer1 count to 0 initially
 }
 
+// read from the RA and RB bits
 void InputConfig(){
+    _CNIEB14 = 1; //Enable Change Notification bit for B14
+    _CNPUB14 = 0; //Disable pull-up resistor
+    _CNPDB14 = 0; //Disable pull-down resistor
     _CNIEB15 = 1; //Enable Change Notification bit for B15
     _CNPUB15 = 0; //Disable pull-up resistor
     _CNPDB15 = 0; //Disable pull-down resistor
     _CNIP = 6; // set interrupt priority
+    _CNIE = 0; // Enable CN interrupts
     _CNIF = 0; // clear interrupt flag
-    _CNIE = 1; // Enable CN interrupts
-    
 }
