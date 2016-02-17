@@ -16,6 +16,11 @@ void PinConfig(){
     _TRISB3 = 0; //set RB3 to output
     _TRISB14 = 1; //set RB14 to input
     _TRISB15 = 1; //set RB15 to input
+    
+    _CVREN = 0;  // turn off cvref pin to be used for i2c
+    _SPI1MD = 1;  //Turn SCK off to be used for I2C
+    _TRISB8 = 0;  //RB8 as output for I2C
+    _TRISB9 = 0;  //RB9 as output for I2X
 
 }
 void AnalogConfig(){

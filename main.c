@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <p24ep128GP202.h>
 #include "configuration.h"
+#include "i2c_helper.h"
+#include "i2c_helper.c"
 
 // Select 8 mhz frc clock
 _FOSCSEL(FNOSC_FRC);
@@ -44,34 +46,57 @@ _FOSCSEL(FNOSC_FRC);
 //        LED1O = 0;
 //}
 
-int main() {
- 
-    AnalogConfig();
-    PinConfig();
-    TimerConfig();
-    InputConfig();
-    LED1O = 0;
 
-    while(1)
-    {
+//main file for button prototype
+//int main() {
+// 
+//    AnalogConfig();
+//    PinConfig();
+//    TimerConfig();
+//    InputConfig();
+//    LED1O = 0;
+
+//    while(1)
+//    {
         //if button value changes
-        if(_CNIF)
-        {
-            _CNIF = 0;
-            if (BUT1I && BUT2I)
-            {
-                _TON = 1; // turn on timer
-                TMR1 = 0; // set timer1 count to 0
-            }else
-            {
-                _TON = 0; // turn off timer
-            }
-        }
-        //if timer hits 4 seconds
-        if(_T1IF){
-            _T1IF = 0; 
-            LED1O = 1;
-        }
-    }   
+//        if(_CNIF)
+//        {
+//            _CNIF = 0;
+//            if (BUT1I && BUT2I)
+//            {
+//                _TON = 1; // turn on timer
+//                TMR1 = 0; // set timer1 count to 0
+//           }else
+//            {
+//                _TON = 0; // turn off timer
+//            }
+//        }
+//        //if timer hits 4 seconds
+//        if(_T1IF){
+//           _T1IF = 0; 
+//            LED1O = 1;
+//            _TON = 0;
+//        }
+//    }   
+//    return (0);
+//}
+
+//experimenting with I2C main function
+
+
+_FICD(ICS_PGD3 & JTAGEN_OFF)
+_FPOR(ALTI2C1_ON)
+
+char buffer[8]="";
+
+int main()
+{
+    PinConfig();
+    i2c1_init(194);
+    char address = 0b00110000;
+
+    I2C1requestFrom(address, 0x0F, 1, buffer);
+    
+   
     return (0);
 }
