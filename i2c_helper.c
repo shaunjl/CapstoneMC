@@ -9,10 +9,11 @@
  * @param addr address
  * @param value value to send
  */
-void I2C1write(char addr, char value)
+void I2C1write(char addr, char sub, char value)
 {
    i2c1_start();
    send_i2c1_byte(addr);
+   send_i2c1_byte(sub); // we added this to get to a sub address
    send_i2c1_byte(value);
    reset_i2c1_bus();
 }

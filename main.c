@@ -94,8 +94,12 @@ int main()
     i2c1_init(194);
     char address = 0b00110000;
 
-    I2C1requestFrom(address, 0x0F, 1, buffer);
+    I2C1requestFrom(address, 0x20, 1, buffer);
+    x = buffer[0];
     
+    I2C1write(address, 0x20, 0x3F);
+    I2C1requestFrom(address, 0x20, 1, buffer);
+    y = buffer[0];
    
     return (0);
 }
