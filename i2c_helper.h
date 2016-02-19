@@ -9,7 +9,6 @@
 #define	I2C_HELPER_H
 #pragma once
 #include <p24ep128GP202.h>
-#include "delay.h"
 
 char i2c1_read_ack(void);
 char i2c1_read(void);

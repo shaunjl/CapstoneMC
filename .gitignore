@@ -1,0 +1,10 @@
+# Compiled source #
+###################
+*.o
+*.o.d
+
+# IDE Specific #
+################
+build/*
+dist/*
+nbproject/*

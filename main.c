@@ -10,7 +10,6 @@
 #include <p24ep128GP202.h>
 #include "configuration.h"
 #include "i2c_helper.h"
-#include "i2c_helper.c"
 
 // Select 8 mhz frc clock
 _FOSCSEL(FNOSC_FRC);
