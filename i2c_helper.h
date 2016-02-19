@@ -7,7 +7,6 @@
 
 #ifndef I2C_HELPER_H
 #define	I2C_HELPER_H
-#pragma once
 #include <p24ep128GP202.h>
 
 char i2c1_read_ack(void);
