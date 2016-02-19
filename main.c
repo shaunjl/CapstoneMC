@@ -87,13 +87,14 @@ _FICD(ICS_PGD3 & JTAGEN_OFF)
 _FPOR(ALTI2C1_ON)
 
 char buffer[8]="";
+int x,y;
 
 int main()
 {
     PinConfig();
     i2c1_init(194);
     char address = 0b00110000;
-
+    
     I2C1requestFrom(address, 0x20, 1, buffer);
     x = buffer[0];
     
