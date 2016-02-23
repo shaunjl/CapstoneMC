@@ -1,6 +1,6 @@
 /* 
  * File:   i2c_helper.h
- * Author: vsherrod
+ * Author: capstone team 23
  *
  * Created on February 15, 2016, 10:59 AM
  */
