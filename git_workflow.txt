@@ -1,0 +1,14 @@
+# To create a local repository:
+<in cmd/terminal navigate to local directory of existing MPLAB project>
+git init
+git remote add origin https://github.com/shaunjl/CapstoneMC.git
+git pull origin master
+
+# General workflow:
+git pull origin master
+<make changes to files>
+git status
+<if you don't want to track any of the untracked files add to .gitignore>
+git add .
+git commit -m "Date: short message"
+git push -u origin master 
