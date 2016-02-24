@@ -10,6 +10,7 @@
 #include <p24ep128GP202.h>
 #include "configuration.h"
 #include "i2c_helper.h"
+#include "accel.h"
 #include "idle.h"
 #include "sleep.h"
 #include "throwing.h"
@@ -37,86 +38,30 @@ _FOSCSEL(FNOSC_FRC);
 #define APPCONFIG     5
 #define PAIRING       6
 
-//void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
-//{
-//    _T1IF = 0;
-//   if (LED2I)
-//    {
-//    LED1O = 1;
-//    LED2O = 0;
-//    }
-//    else
-//    {
-//    LED1O = 0;
-//    LED2O = 1;
-//    }
-//}
+#define A1        0b00110010 //define address for accelerometer 1 (positive x-axis)
+#define A2        0b00110000 //define address for accelerometer 2 (positive y-axis)
+#define A3        0b00110010 //define address for accelerometer 3 (negative x-axis)
+#define A4        0b00110000 //define address for accelerometer 4 (negative y-axis)
 
-//void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void)
-//{
-//    _CNIF = 0;
-//    if (BUT1I)
-//        LED1O = 1;
-//    else
-//        LED1O = 0;
-//}
-
-
-//main file for button prototype
-//int main() {
-// 
-//    AnalogConfig();
-//    PinConfig();
-//    TimerConfig();
-//    InputConfig();
-//    LED1O = 0;
-
-//    while(1)
-//    {
-        //if button value changes
-//        if(_CNIF)
-//        {
-//            _CNIF = 0;
-//            if (BUT1I && BUT2I)
-//            {
-//                _TON = 1; // turn on timer
-//                TMR1 = 0; // set timer1 count to 0
-//           }else
-//            {
-//                _TON = 0; // turn off timer
-//            }
-//        }
-//        //if timer hits 4 seconds
-//        if(_T1IF){
-//           _T1IF = 0; 
-//            LED1O = 1;
-//            _TON = 0;
-//        }
-//    }   
-//    return (0);
-//}
-
-//experimenting with I2C main function
-
-
-_FICD(ICS_PGD3 & JTAGEN_OFF)
-_FPOR(ALTI2C1_ON)
+_FICD(ICS_PGD3 & JTAGEN_OFF) // communicate on PGD3 and turn off JTAGEN so can do i2c1
+_FPOR(ALTI2C1_ON & ALTI2C2_ON) //map i2c1 and i2c2 to the right pins
 
 char buffer[8]="";
-int x,y;
 
 int main()
 {
     PinConfig();
-    i2c1_init(194);
-    char address = 0b00110000;
     
-    I2C1requestFrom(address, 0x20, 1, buffer);
-    x = buffer[0];
+    // I2C Config
+    i2c1_init(194); //start up i2c1
+    i2c2_init(194); //start up i2c2
     
-    I2C1write(address, 0x20, 0x3F);
-    I2C1requestFrom(address, 0x20, 1, buffer);
-    y = buffer[0];
+    Accel1Config(A1, buffer); //configures accelerometer on I2C1 line
+    Accel1Config(A2, buffer); //configures accelerometer on I2C1 line
+    Accel2Config(A3, buffer); 
+    Accel2Config(A4, buffer);
+    
+    
     int state = IDLE;
     while(1){
         switch ( state ) {

@@ -7,7 +7,7 @@
 
 
 #include "xc.h"
-#pragma once
+#include "idle.h"
 
 /*
  @return the next state
