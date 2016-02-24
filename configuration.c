@@ -1,6 +1,8 @@
 #include "xc.h"
 #include "configuration.h"
 
+
+
 // read from the RA and RB bits but write to the LAT bits
 void PinConfig(){
     ANSELA = 0; //set all A ports to digital (turn analog off)
@@ -51,4 +53,98 @@ void InputConfig(){
     _CNIP = 6; // set interrupt priority
     _CNIE = 0; // Enable CN interrupts
     _CNIF = 0; // clear interrupt flag
+}
+
+void I2C1Config(char addr, char* buffer)
+{
+    I2C1write(addr, 0x20, 0x3F); //configure CTRL_REG1 of accelerometer (normal mode and 1000 Hz rate and all axises on)
+    I2C1requestFrom(addr, 0x20, 1, buffer);
+    while(buffer[0] != 0x3F) //check to make sure it reconfigured if not run again
+    {
+        I2C1write(addr, 0x20, 0x3F); 
+        I2C1requestFrom(addr, 0x20, 1, buffer);
+    }
+    
+    I2C1write(addr, 0x23, 0x10); //configure CTRL_REG4 of accelerometer (Full-scale range (200g))
+    I2C1requestFrom(addr, 0x23, 1, buffer); //check to make sure it configured, if not run again
+    while(buffer[0] != 0x10)
+    {
+        I2C1write(addr, 0x23, 0x10);
+        I2C1requestFrom(addr, 0x23, 1, buffer);
+    }
+   
+}
+
+void I2C2Config(char addr, char* buffer)
+{
+    I2C2write(addr, 0x20, 0x3F); //configure CTRL_REG1 of accelerometer (normal mode and 1000 Hz rate and all axises on)
+    I2C2requestFrom(addr, 0x20, 1, buffer);
+    while(buffer[0] != 0x3F) //check to make sure it reconfigured if not run again
+    {
+        I2C2write(addr, 0x20, 0x3F); 
+        I2C2requestFrom(addr, 0x20, 1, buffer);
+    }
+    
+    I2C2write(addr, 0x23, 0x10); //configure CTRL_REG4 of accelerometer (Full-scale range (200g))
+    I2C2requestFrom(addr, 0x23, 1, buffer); //check to make sure it configured, if not run again
+    while(buffer[0] != 0x10)
+    {
+        I2C2write(addr, 0x23, 0x10);
+        I2C2requestFrom(addr, 0x23, 1, buffer);
+    }
+   
+}
+
+int ReadX1(char addr, char* buffer)
+{
+    int x;
+    I2C1requestFrom(addr, 0x29, 1, buffer);
+    x = buffer[0];
+    
+    return(x);
+}
+
+int ReadY1(char addr, char* buffer)
+{
+    int y;
+    I2C1requestFrom(addr, 0x2B, 1, buffer);
+    y = buffer[0];
+    
+    return(y);
+}
+
+int ReadZ1(char addr, char* buffer)
+{
+    int z;
+    I2C1requestFrom(addr, 0x2D, 1, buffer);
+    z = buffer[0];
+    
+    return(z);
+}
+
+int ReadX2(char addr, char* buffer)
+{
+    int x;
+    I2C2requestFrom(addr, 0x29, 1, buffer);
+    x = buffer[0];
+    
+    return(x);
+}
+
+int ReadY2(char addr, char* buffer)
+{
+    int y;
+    I2C2requestFrom(addr, 0x2B, 1, buffer);
+    y = buffer[0];
+    
+    return(y);
+}
+
+int ReadZ2(char addr, char* buffer)
+{
+    int z;
+    I2C2requestFrom(addr, 0x2D, 1, buffer);
+    z = buffer[0];
+    
+    return(z);
 }

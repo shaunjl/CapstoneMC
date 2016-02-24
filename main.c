@@ -118,7 +118,7 @@ int main()
     I2C1requestFrom(address, 0x20, 1, buffer);
     y = buffer[0];
     int state = IDLE;
-    for(;;){
+    while(1){
         switch ( state ) {
             case IDLE:
                 state = idle();
