@@ -51,6 +51,7 @@ char buffer[8]="";
 int main()
 {
     PinConfig();
+    TimerConfig();
     
     // I2C Config
     i2c1_init(194); //start up i2c1
