@@ -10,18 +10,14 @@
 #include "throwing.h"
 #include "accel.h"
 
-
-#define A1        0b00110010 //define address for accelerometer 1 (positive x-axis)
-#define A2        0b00110000 //define address for accelerometer 2 (positive y-axis)
-#define A3        0b00110010 //define address for accelerometer 3 (negative x-axis)
-#define A4        0b00110000 //define address for accelerometer 4 (negative y-axis)
-
-int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4;
-
 /*
  @return the next state
  */
 int throwing(void) {
+    
+    extern int A1, A2, A3, A4;
+    extern int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4;
+    
     char buffer[8]="";
     
     while(1){

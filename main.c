@@ -38,10 +38,6 @@ _FOSCSEL(FNOSC_FRC);
 #define APPCONFIG     5
 #define PAIRING       6
 
-#define A1        0b00110010 //define address for accelerometer 1 (positive x-axis)
-#define A2        0b00110000 //define address for accelerometer 2 (positive y-axis)
-#define A3        0b00110010 //define address for accelerometer 3 (negative x-axis)
-#define A4        0b00110000 //define address for accelerometer 4 (negative y-axis)
 
 _FICD(ICS_PGD3 & JTAGEN_OFF) // communicate on PGD3 and turn off JTAGEN so can do i2c1
 _FPOR(ALTI2C1_ON & ALTI2C2_ON) //map i2c1 and i2c2 to the right pins
@@ -50,6 +46,8 @@ char buffer[8]="";
 
 int main()
 {
+    extern int A1, A2, A3, A4;
+
     PinConfig();
     TimerConfig();
     
