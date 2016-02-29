@@ -70,6 +70,9 @@ void TimerConfig(){
 }
 
 // read from the RA and RB bits
+int BUT1IN = _RB14;
+int BUT2IN = _RB15;
+
 void InputConfig(){
     _CNIEB14 = 1; //Enable Change Notification bit for B14
     _CNPUB14 = 0; //Disable pull-up resistor
@@ -80,4 +83,5 @@ void InputConfig(){
     _CNIP = 6; // set interrupt priority
     _CNIE = 0; // Enable CN interrupts
     _CNIF = 0; // clear interrupt flag
+    
 }
