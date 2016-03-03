@@ -17,7 +17,8 @@ int A2 = 0b00110000; //define address for accelerometer 2 (positive y-axis)
 int A3 = 0b00110010; //define address for accelerometer 3 (negative x-axis)
 int A4 = 0b00110000; //define address for accelerometer 4 (negative y-axis)
 
-int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4;
+int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,A1x,A1y,A1z,A2x,A2y,A2z,A3x,A3y,A3z,A4x,A4y,A4z;
+float A0x,A0y,A0z, alphax, alphay, alphaz, wx, wy, wz;
 
 // Accel. 1 & 2 are on bus line 1, 3 & 4 are on bus line 2
 // Accel. 1 & 2 are on x, y axis, Accel. 3 & 4 on -x, -y

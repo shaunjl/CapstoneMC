@@ -15,18 +15,14 @@
 
 int binTwosComplementToSignedDecimal(char binary[],int significantBits);
 
-int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,A1x,A1y,A1z,A2x,A2y,A2z,A3x,A3y,A3z,A4x,A4y,A4z;
-float A0x,A0y,A0z, alphax, alphay, alphaz, wx, wy, wz;
-char l;
-
-
 /*
  @return the next state
  */
 int throwing(void) {
     
     extern int A1, A2, A3, A4;
-    extern int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4;
+    extern int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,A1x,A1y,A1z,A2x,A2y,A2z,A3x,A3y,A3z,A4x,A4y,A4z;
+    extern float A0x,A0y,A0z, alphax, alphay, alphaz, wx, wy, wz;
     
     char buffer[8]="";
     float timestep = .001;
