@@ -9,6 +9,7 @@
 #include "xc.h"
 #include "accel.h"
 #include "i2c_helper.h"
+#include <math.h>
 
 // Accelerometer Config
 
@@ -123,23 +124,27 @@ int ReadZ2(char addr, char* buffer)
 /*
  @return an array [x,y,z]
  */
-int* GetAccelData()
+int* GetAccelData(char* buffer)
 {
-        x1 = ReadX1(A1, buffer); //read x axis
-        y1 = ReadY1(A1, buffer); //read y axis
-        z1 = ReadZ1(A1, buffer); 
+        A1x = ReadX1(A1, buffer); //read x axis of accelerometer 1
+        A1y = -1*ReadY1(A1, buffer); //read y axis of accelerometer 1
+        A1z = -1*ReadZ1(A1, buffer); //read z axis of accelerometer 1
 
-        x2 = ReadX1(A2, buffer);
-        y2 = ReadY1(A2, buffer);
-        z2 = ReadZ1(A2, buffer);
+        A2x = ReadX1(A2, buffer); //read x axis of accelerometer 2
+        A2y = -1*ReadY1(A2, buffer);  //read y axis of accelerometer 2
+        A2z = -1*ReadZ1(A2, buffer);  //read z axis of accelerometer 2
 
-        x3 = ReadX2(A3, buffer);
-        y3 = ReadY2(A3, buffer);
-        z3 = ReadZ2(A3, buffer);
+        A3x = ReadX2(A3, buffer);  //read x axis of accelerometer 3
+        A3y = -1*ReadY2(A3, buffer);  //read y axis of accelerometer 3
+        A3z = -1*ReadZ2(A3, buffer);  //read z axis of accelerometer 3
 
-        x4 = ReadX2(A4, buffer);
-        y4 = ReadY2(A4, buffer);
-        z4 = ReadZ2(A4, buffer);
-        
-        //put algorithm here to get x,y,z
+        A4x = ReadX2(A4, buffer);  //read x axis of accelerometer 4
+        A4y = -1*ReadY2(A4, buffer);  //read y axis of accelerometer 4
+        A4z = -1*ReadZ2(A4, buffer);  //read z axis of accelerometer 4
+
+        A0x = (A1x+A2x+A3x+A4x)/4.0;
+        A0y = (A1y+A2y+A3y+A4y)/4.0;
+        A0z = (A1z+A2z+A3z+A4z)/4.0;
+         
+        return([A0x,A0y,Aoz]);
 }
