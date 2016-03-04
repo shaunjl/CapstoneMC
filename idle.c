@@ -11,13 +11,17 @@
 #include "configuration.h"
 #include "accel.h"
 
-extern int BUT1IN;
-extern int BUT2IN;
+//extern int BUT1IN;
+//extern int BUT2IN;
 
 /*
  @return the next state
  */
 int idle(void) {
+    
+    int BUT1IN = _RB14;
+    int BUT2IN = _RB15;
+    
     return 0;
     //timer3 for sleep mode - if any other interrupt then reset
     //button, timer for sleep mode - if pressed for multiple seconds then sleep mode

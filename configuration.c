@@ -61,7 +61,7 @@ void TimerConfig(){
     // this means 2^16/(4Mhz/256)) = 4.19 seconds between interrupts 
     T3CONbits.TON = 0; //timer3 off
     T3CONbits.TCKPS = 0b11; // 1 count: 256 cycles
-    PR3 = 937500; //number to count to
+    PR3 = 65000; //number to count to
     T3CONbits.TCS = 0; // no external clock source
     _T3IP = 4; // Interrupt priority
     _T3IE = 0; // Enable interrupt
@@ -70,8 +70,7 @@ void TimerConfig(){
 }
 
 // read from the RA and RB bits
-int BUT1IN = _RB14;
-int BUT2IN = _RB15;
+
 
 void InputConfig(){
     _CNIEB14 = 1; //Enable Change Notification bit for B14

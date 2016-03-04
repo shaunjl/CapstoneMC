@@ -124,7 +124,7 @@ int ReadZ2(char addr, char* buffer)
 /*
  @return an array [x,y,z]
  */
-int* GetAccelData(char* buffer)
+float* GetAccelData(char* buffer)
 {
         A1x = ReadX1(A1, buffer); //read x axis of accelerometer 1
         A1y = -1*ReadY1(A1, buffer); //read y axis of accelerometer 1
@@ -145,6 +145,8 @@ int* GetAccelData(char* buffer)
         A0x = (A1x+A2x+A3x+A4x)/4.0;
         A0y = (A1y+A2y+A3y+A4y)/4.0;
         A0z = (A1z+A2z+A3z+A4z)/4.0;
-         
-        return([A0x,A0y,Aoz]);
+        
+        float ret[] = {A0x,A0y,A0z};
+        
+        return(ret);
 }

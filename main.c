@@ -39,6 +39,7 @@ _FOSCSEL(FNOSC_FRC);
 #define PAIRING       6
 
 
+
 _FICD(ICS_PGD3 & JTAGEN_OFF) // communicate on PGD3 and turn off JTAGEN so can do i2c1
 _FPOR(ALTI2C1_ON & ALTI2C2_ON) //map i2c1 and i2c2 to the right pins
 
