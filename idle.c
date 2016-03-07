@@ -36,9 +36,9 @@ int idle(void) {
         // go to sleep if no other mode selected after 5 minutes
         if(_T3IF){
             _T3IF = 0;
-            num_minutes+=3;
+            num_seconds+=3;
         }
-        if(num_minutes >= 300){
+        if(num_seconds >= 300){
             T3CONbits.TON = 0; // turn timer3 off
             TMR3 = 0; // set count to 0
             return 1; // go to sleep mode
