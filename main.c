@@ -62,7 +62,7 @@ int main()
     Accel2Config(A4, buffer);
     
     
-    int state = IDLE;
+    int state = THROWING;
     while(1){
         switch ( state ) {
             case IDLE:
