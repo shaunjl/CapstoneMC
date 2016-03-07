@@ -7,6 +7,7 @@ void PinConfig();
 void AnalogConfig();
 void TimerConfig();
 void InputConfig();
+void ConfigTimer5(unsigned tckps, unsigned pr5, unsigned t5ip);
 void AccelTimerConfig();
 
 #endif	/* CONFIGURATION_H */

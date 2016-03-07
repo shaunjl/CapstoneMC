@@ -67,6 +67,18 @@ void TimerConfig(){
     _T3IE = 0; // Enable interrupt
     _T3IF = 0; // Clear interrupt flag
     TMR3 = 0; // set timer3 count to 0 initial
+    
+    //timer 5 - Configurable timer (default 3 second)
+    // 16 bit counter, 8 MHz clock (4 MHz cycles)
+    // this means PRx/(4Mhz/TCKPS)) seconds between interrupts 
+    T5CONbits.TON = 0; //timer3 off
+    T5CONbits.TCKPS = 0b11; // 1 count: 256 cycles
+    PR5 = 46875; //number to count to
+    T5CONbits.TCS = 0; // no external clock source
+    _T5IP = 4; // Interrupt priority
+    _T5IE = 0; // Enable interrupt
+    _T5IF = 0; // Clear interrupt flag
+    TMR5 = 0; // set timer5 count to 0 initial
 }
 
 // read from the RA and RB bits
@@ -83,6 +95,12 @@ void InputConfig(){
     _CNIE = 0; // Enable CN interrupts
     _CNIF = 0; // clear interrupt flag
     
+}
+
+void ConfigTimer5(unsigned tckps, unsigned pr5, unsigned t5ip){
+    T5CONbits.TCKPS = tckps;
+    PR5 = pr5;
+    _T5IP = t5ip;
 }
 
 void AccelTimerConfig(){
