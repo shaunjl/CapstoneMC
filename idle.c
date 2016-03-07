@@ -11,9 +11,6 @@
 #include "configuration.h"
 #include "accel.h"
 
-//extern int BUT1IN;
-//extern int BUT2IN;
-
 /*
  @return the next state
  */
@@ -28,7 +25,7 @@ int idle(void) {
     
     TMR3 = 0; // set count to 0
     T3CONbits.TON = 1; // turn timer3 on
-    int num_minutes = 0;
+    int num_seconds = 0;
     
     //timer1 for pitch selection
     TMR1 = 0; // set count to 0
@@ -39,9 +36,9 @@ int idle(void) {
         // go to sleep if no other mode selected after 5 minutes
         if(_T3IF){
             _T3IF = 0;
-            num_minutes++;
+            num_minutes+=3;
         }
-        if(num_minutes >= 5){
+        if(num_minutes >= 300){
             T3CONbits.TON = 0; // turn timer3 off
             TMR3 = 0; // set count to 0
             return 1; // go to sleep mode
@@ -61,7 +58,7 @@ int idle(void) {
                 _TON = 0; // turn off timer
             }
         }
-        //if timer1 hits 4 seconds go to pitch selection
+        //if timer1 hits 3 seconds go to pitch selection
         if(_T1IF){
            _T1IF = 0; 
            _TON = 0;

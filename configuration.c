@@ -33,7 +33,7 @@ void AnalogConfig(){
 void TimerConfig(){
     //timer 1 - 3 second timer
     // 16 bit counter, 8 MHz clock (4 MHz cycles)
-    // this means 46875/(4Mhz/256)) = 3 seconds between interrupts 
+    // this means PRx/(4Mhz/TCKPS)) seconds between interrupts 
     _TON = 0; //timer1 off
     _TCKPS = 0b11; // 1 count: 256 cycles
     PR1 = 46875; //number to count to
@@ -46,7 +46,7 @@ void TimerConfig(){
    
     //timer 2 - 3 second timer
     // 16 bit counter, 8 MHz clock (4 MHz cycles)
-    // this means 2^16/(4Mhz/256)) = 4.19 seconds between interrupts 
+    // this means PRx/(4Mhz/TCKPS)) seconds between interrupts 
     T2CONbits.TON = 0; //timer2 off
     T2CONbits.TCKPS = 0b11; // 1 count: 256 cycles
     PR2 = 46875; //number to count to
@@ -56,12 +56,12 @@ void TimerConfig(){
     _T2IF = 0; // Clear interrupt flag
     TMR2 = 0; // set timer2 count to 0 initial
    
-    //timer 3 - 1 minute timer
+    //timer 3 - 3 second timer
     // 16 bit counter, 8 MHz clock (4 MHz cycles)
-    // this means 2^16/(4Mhz/256)) = 4.19 seconds between interrupts 
+    // this means PRx/(4Mhz/TCKPS)) seconds between interrupts 
     T3CONbits.TON = 0; //timer3 off
     T3CONbits.TCKPS = 0b11; // 1 count: 256 cycles
-    PR3 = 65000; //number to count to
+    PR3 = 46875; //number to count to
     T3CONbits.TCS = 0; // no external clock source
     _T3IP = 4; // Interrupt priority
     _T3IE = 0; // Enable interrupt
