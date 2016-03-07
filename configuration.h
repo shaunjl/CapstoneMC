@@ -7,6 +7,7 @@ void PinConfig();
 void AnalogConfig();
 void TimerConfig();
 void InputConfig();
+void AccelTimerConfig();
 
 #endif	/* CONFIGURATION_H */
 

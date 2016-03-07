@@ -22,7 +22,7 @@ int throwing(void) {
     
     extern int A1, A2, A3, A4;
     extern int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,A1x,A1y,A1z,A2x,A2y,A2z,A3x,A3y,A3z,A4x,A4y,A4z;
-    extern float A0x,A0y,A0z, alphax, alphay, alphaz, wx, wy, wz;
+    extern float A0x,A0y,A0z, alphax, alphay, alphaz, wx, wy, wz, psi, phi, theta;
     
     char buffer[8]="";
     float timestep = .001;
@@ -30,6 +30,10 @@ int throwing(void) {
     wx = 0;
     wy = 0;
     wz = 0;
+    
+    psi = 0;
+    phi = 0;
+    theta = 0;
     
     while(1){
         //int l[8];
@@ -81,6 +85,8 @@ int throwing(void) {
         wx = wx + alphax*timestep;
         wy = wy + alphay*timestep;
         wz = wz + alphaz*timestep;
+        
+        
         
 
       
