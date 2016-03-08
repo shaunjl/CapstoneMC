@@ -10,6 +10,7 @@
 #include "idle.h"
 #include "configuration.h"
 #include "accel.h"
+#include <math.h>
 
 /*
  @return the next state
@@ -18,6 +19,7 @@ int idle(void) {
     
     int BUT1IN = _RB14;
     int BUT2IN = _RB15;
+    float accel_threshold = 5.0; // TODO- change
     
     return 0;
     //timer3 for sleep mode - if any other interrupt then reset
@@ -33,6 +35,7 @@ int idle(void) {
     
     while(1)
     {
+        // SLEEP
         // go to sleep if no other mode selected after 5 minutes
         if(_T3IF){
             _T3IF = 0;
@@ -44,6 +47,7 @@ int idle(void) {
             return 1; // go to sleep mode
         }
         
+        // PITCH SELECTION
         // go to pitch selection mode on button hold
         //if button value changes
         if(_CNIF)
@@ -65,6 +69,15 @@ int idle(void) {
            TMR1 = 0;
            return 4; 
         }
+      
+        // THROWING
+        char buffer[8]="";
+        float * data = GetAccelData(buffer);
+        float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0
+        if (avg >= accel_threshold)
+            return 2;
+        
+        
     }   
     return(0);
 }

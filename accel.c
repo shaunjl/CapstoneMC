@@ -122,7 +122,7 @@ int ReadZ2(char addr, char* buffer)
 }
 
 /*
- @return an array [x,y,z]
+ @return an array [x,y,z] in units of m/s^2
  */
 float* GetAccelData(char* buffer)
 {
@@ -146,7 +146,7 @@ float* GetAccelData(char* buffer)
         A0y = (A1y+A2y+A3y+A4y)/4.0;
         A0z = (A1z+A2z+A3z+A4z)/4.0;
         
-        float ret[] = {A0x,A0y,A0z};
+        float ret[] = {A0x/9.8,A0y/9.8,A0z/9.8};
         
         return(ret);
 }
