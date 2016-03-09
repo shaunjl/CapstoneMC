@@ -108,11 +108,12 @@ void AccelTimerConfig(){
     // 16 bit counter, 8 MHz clock (4 MHz cycles)
     // s 
     T4CONbits.TON = 0; //timer2 off
-    T4CONbits.TCKPS = 0b11; // 1 count: 256 cycles
-    PR4 = 3999; //number to count to
+    T4CONbits.TCKPS = 0b00; // 1 count: 1 cycles
+    PR4 = 3999; //number to count to 3999
     T4CONbits.TCS = 0; // no external clock source
     _T4IP = 4; // Interrupt priority
-    _T4IE = 1; // Enable interrupt
+    _T4IE = 0; // Enable interrupt
     _T4IF = 0; // Clear interrupt flag
     TMR4 = 0; // set timer4 count to 0 initial
+    T4CONbits.TON = 1;
 }

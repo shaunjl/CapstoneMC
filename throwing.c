@@ -35,6 +35,10 @@ int throwing(void) {
     phi = 0;
     theta = 0;
     
+    _LATB2 = 1;
+    
+    AccelTimerConfig();
+    
     while(1){
         //int l[8];
         //l[0] = 1;
@@ -87,7 +91,18 @@ int throwing(void) {
         wz = wz + alphaz*timestep;
         
         
-        
+        if(_T4IF)
+        {
+            _T4IF = 0;
+            if(_RB2)
+            {
+                _LATB2 = 0;
+            }
+            if(_RB2==0)
+            {
+                _LATB2 = 1;
+            }
+        }
 
       
     }
@@ -114,3 +129,16 @@ int binTwosComplementToSignedDecimal(char binary[],int significantBits)
 
     return sum;
 }
+
+//void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void)
+//{
+//    _T4IF = 0;
+//            if(_RB2)
+//            {
+//                _LATB2 = 0;
+//            }
+//            if(_RB2==0)
+//            {
+//                _LATB2 = 1;
+//            }
+//}
