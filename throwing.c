@@ -31,6 +31,8 @@ int throwing(void) {
     wy = 0;
     wz = 0;
     
+   
+    
     psi = 0;
     phi = 0;
     theta = 0;
@@ -85,6 +87,8 @@ int throwing(void) {
         
         alphax = -1*(A0z-A2z+wy*wz*.015)/.015;
         alphay = (A0z-A1z+wx*wz*.015)/.015;
+        
+        
         
         wx = wx + alphax*timestep;
         wy = wy + alphay*timestep;
