@@ -73,7 +73,7 @@ int idle(void) {
         // THROWING
         char buffer[8]="";
         float * data = GetAccelData(buffer);
-        float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0
+        float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0;
         if (avg >= accel_threshold)
             return 2;
         
