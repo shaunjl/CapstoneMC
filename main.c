@@ -21,24 +21,6 @@
 
 // Select 8 mhz frc clock
 _FOSCSEL(FNOSC_FRC);
-//set output registers to the LEDs and input to Buttons
-#define LED1I       _RB2  
-#define LED1O      _LATB2
-#define LED2I 	    _RB3
-#define LED2O      _LATB3
-#define BUT1I       _RB14
-#define BUT2I       _RB15
-
-// Define all states
-#define IDLE          0
-#define SLEEP         1
-#define THROWING      2
-#define CHARGING      3
-#define PSELECT       4
-#define APPCONFIG     5
-#define PAIRING       6
-
-
 
 _FICD(ICS_PGD3 & JTAGEN_OFF) // communicate on PGD3 and turn off JTAGEN so can do i2c1
 _FPOR(ALTI2C1_ON & ALTI2C2_ON) //map i2c1 and i2c2 to the right pins
@@ -48,7 +30,8 @@ char buffer[8]="";
 int main()
 {
     extern int A1, A2, A3, A4;
-
+    extern int PITCH;
+    
     PinConfig();
     TimerConfig();
     
@@ -61,8 +44,9 @@ int main()
     Accel2Config(A3, buffer); 
     Accel2Config(A4, buffer);
     
-    
-    int state = THROWING;
+    // Initialize to IDLE mode, RISE ball
+    PITCH = RISE;
+    int state = IDLE;
     while(1){
         switch ( state ) {
             case IDLE:

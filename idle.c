@@ -16,9 +16,9 @@
  @return the next state
  */
 int idle(void) {
+    extern int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,A1x,A1y,A1z,A2x,A2y,A2z,A3x,A3y,A3z,A4x,A4y,A4z;
+    extern float A0x,A0y,A0z, alphax, alphay, alphaz, wx, wy, wz, psi, phi, theta, psidot, phidot, thetadot;
     
-    int BUT1IN = _RB14;
-    int BUT2IN = _RB15;
     float accel_threshold = 5.0; // TODO- change
     
     return 0;
@@ -35,6 +35,7 @@ int idle(void) {
     
     while(1)
     {
+        
         // SLEEP
         // go to sleep if no other mode selected after 5 minutes
         if(_T3IF){
@@ -49,7 +50,7 @@ int idle(void) {
         
         // PITCH SELECTION
         // go to pitch selection mode on button hold
-        //if button value changes
+        //if button input pin value changes
         if(_CNIF)
         {
             _CNIF = 0;
@@ -79,5 +80,6 @@ int idle(void) {
         
         
     }   
+    
     return(0);
 }

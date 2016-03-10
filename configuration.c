@@ -1,7 +1,7 @@
 #include "xc.h"
 #include "configuration.h"
 
-
+int PITCH;
 
 // read from the RA and RB bits but write to the LAT bits
 void PinConfig(){
@@ -56,12 +56,12 @@ void TimerConfig(){
     _T2IF = 0; // Clear interrupt flag
     TMR2 = 0; // set timer2 count to 0 initial
    
-    //timer 3 - 3 second timer
+    //timer 3 - 1 second timer
     // 16 bit counter, 8 MHz clock (4 MHz cycles)
     // this means PRx/(4Mhz/TCKPS)) seconds between interrupts 
     T3CONbits.TON = 0; //timer3 off
     T3CONbits.TCKPS = 0b11; // 1 count: 256 cycles
-    PR3 = 46875; //number to count to
+    PR3 = 15625; //number to count to
     T3CONbits.TCS = 0; // no external clock source
     _T3IP = 4; // Interrupt priority
     _T3IE = 0; // Enable interrupt

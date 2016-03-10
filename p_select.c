@@ -8,72 +8,45 @@
 
 #include "xc.h"
 #include "p_select.h"
-
-//void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
-//{
-//    _T1IF = 0;
-//   if (LED2I)
-//    {
-//    LED1O = 1;
-//    LED2O = 0;
-//    }
-//    else
-//    {
-//    LED1O = 0;
-//    LED2O = 1;
-//    }
-//}
-
-//void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void)
-//{
-//    _CNIF = 0;
-//    if (BUT1I)
-//        LED1O = 1;
-//    else
-//        LED1O = 0;
-//}
-
-
-//main file for button prototype
-//int main() {
-// 
-//    AnalogConfig();
-//    PinConfig();
-//    TimerConfig();
-//    InputConfig();
-//    LED1O = 0;
-
-//    while(1)
-//    {
-        //if button value changes
-//        if(_CNIF)
-//        {
-//            _CNIF = 0;
-//            if (BUT1I && BUT2I)
-//            {
-//                _TON = 1; // turn on timer
-//                TMR1 = 0; // set timer1 count to 0
-//           }else
-//            {
-//                _TON = 0; // turn off timer
-//            }
-//        }
-//        //if timer hits 4 seconds
-//        if(_T1IF){
-//           _T1IF = 0; 
-//            LED1O = 1;
-//            _TON = 0;
-//        }
-//    }   
-//    return (0);
-//}
-
-//experimenting with I2C main function
-
+#include "configuration.h"
 
 /*
  @return the next state
  */
 int p_select(void) {
+    // spherical coordinates
+    extern float psi, phi, theta;
+    extern int PITCH;
+    
+    // Set up Timer3
+    TMR3 = 0;
+    _T3IF = 0;
+    T3CONbits.TON = 1;
+    
+    while(1){
+        
+        //Flash LED 
+        if(_T3IF){
+            _T3IF = 0;
+            if (LED1I)
+                LED1O = 0;
+            else
+                LED1O = 1;     
+        }
+        // SELECT PITCH
+        //if button input pin value changes
+        if(_CNIF)
+        {
+            _CNIF = 0;
+            if (BUT1IN && BUT2IN) // if pressing both buttons
+            {
+                // TODO - get phi, phi, theta values
+                // depending on orientation of ball set PITCH
+                LED1O = 0;
+                return 0;
+            }
+        }
+    
+    }
     return 0;
 }

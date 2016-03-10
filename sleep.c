@@ -8,10 +8,24 @@
 
 #include "xc.h"
 #include "sleep.h"
+#include "accel.h"
+#include <math.h>
 
 /*
  @return the next state
  */
 int sleep(void) {
+    
+    float accel_threshold = 5.0; // TODO- change
+    
+    while(1){
+        // Come out of sleep
+        char buffer[8]="";
+        float * data = GetAccelData(buffer);
+        float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0;
+        if (avg >= accel_threshold)
+            return 0;
+    }
+    
     return 0;
 }

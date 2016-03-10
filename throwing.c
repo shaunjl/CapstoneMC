@@ -23,19 +23,18 @@ int throwing(void) {
     extern int A1, A2, A3, A4;
     extern int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,A1x,A1y,A1z,A2x,A2y,A2z,A3x,A3y,A3z,A4x,A4y,A4z;
     extern float A0x,A0y,A0z, alphax, alphay, alphaz, wx, wy, wz, psi, phi, theta, psidot, phidot, thetadot;
-    
+   
     char buffer[8]="";
     float timestep = .001;
-    
-    wx = 0;
-    wy = 0;
-    wz = 0;
-    
    
+    // set all values to zero
+    void zeroVals(){
+        wx=0.0;wy=0.0;wz=0.0;
+        psi=0.0;phi=0.0;theta=0.0;
+    }
     
-    psi = 0;
-    phi = 0;
-    theta = 0;
+    // Zero all vals
+    zeroVals();
     
     _LATB2 = 1;
     
@@ -112,6 +111,11 @@ int throwing(void) {
 
       
     }
+    
+    // VALLAN- Make sure that wherever you decide to return you call zeroVals() right before you return
+    zeroVals();
+    
+    return 0;
 }
 
 int binTwosComplementToSignedDecimal(char binary[],int significantBits) 
