@@ -48,13 +48,19 @@ int idle(void) {
             return 1; // go to sleep mode
         }
         
-        // PITCH SELECTION
+        // PITCH SELECTION AND CHARGING
+        // go to charging on charging pin
         // go to pitch selection mode on button hold
         //if button input pin value changes
         if(_CNIF)
         {
             _CNIF = 0;
-            if (BUT1IN && BUT2IN)
+            // check charging
+            if (CHARGEIN){
+                _TON = 0; // turn timer1 off 
+                TMR1 = 0; // set count to 0
+                return 3;
+            }else if (BUT1IN && BUT2IN)
             {
                 _TON = 1; // turn on timer
                 TMR1 = 0; // set timer1 count to 0

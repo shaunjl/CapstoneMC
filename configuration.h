@@ -9,11 +9,14 @@
 #define SCREW 2
 #define CURVE 3
 
-//set output registers to the LEDs and input to Buttons
-#define LED1I       _RB2  
-#define LED1O      _LATB2
-#define LED2I 	    _RB3
-#define LED2O      _LATB3
+//set output registers to the LEDs
+#define LED1I        _RB2  
+#define LED1O       _LATB2
+#define LED2I 	     _RB3
+#define LED2O       _LATB3
+//set input from charging
+#define CHARGEIN     _RB13
+//set input from buttons
 #define BUT1IN       _RB14
 #define BUT2IN       _RB15
 
