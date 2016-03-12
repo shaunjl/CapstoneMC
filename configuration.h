@@ -1,7 +1,7 @@
 #ifndef CONFIGURATION_H
 #define	CONFIGURATION_H
 
-#include <p24ep128GP202.h>
+#include <p24ep512GP204.h>
 
 // Define types of ball
 #define RISE  0

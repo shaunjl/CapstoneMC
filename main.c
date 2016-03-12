@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <p24ep128GP202.h>
+#include <p24ep512GP204.h>
 #include "configuration.h"
 #include "i2c_helper.h"
 #include "accel.h"
@@ -22,8 +22,8 @@
 // Select 8 mhz frc clock
 _FOSCSEL(FNOSC_FRC);
 
-_FICD(ICS_PGD3 & JTAGEN_OFF) // communicate on PGD3 and turn off JTAGEN so can do i2c1
-_FPOR(ALTI2C1_ON & ALTI2C2_ON) //map i2c1 and i2c2 to the right pins
+_FICD(ICS_PGD2 & JTAGEN_OFF) // communicate on PGD2 and turn off JTAGEN so can do i2c1
+_FPOR(ALTI2C1_OFF & ALTI2C2_OFF) //map i2c1 and i2c2 to the right pins
 
 char buffer[8]="";
 
@@ -33,8 +33,7 @@ int main()
     extern int PITCH;
     
     PinConfig();
-    TimerConfig();
-    
+    TimerConfig();  
     // I2C Config
     i2c1_init(194); //start up i2c1
     i2c2_init(194); //start up i2c2
@@ -43,10 +42,9 @@ int main()
     Accel1Config(A2, buffer); //configures accelerometer on I2C1 line
     Accel2Config(A3, buffer); 
     Accel2Config(A4, buffer);
-    
     // Initialize to IDLE mode, RISE ball
     PITCH = RISE;
-    int state = IDLE;
+    int state = THROWING; // TODO- change to IDLE
     while(1){
         switch ( state ) {
             case IDLE:
