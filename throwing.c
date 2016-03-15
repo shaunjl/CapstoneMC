@@ -94,20 +94,19 @@ int throwing(void) {
         wz = wz + alphaz*timestep;
         
         
-        
-        
-        if(_T4IF)
-        {
-            _T4IF = 0;
-            if(_RB2)
-            {
-                _LATB2 = 0;
-            }
-            if(_RB2==0)
-            {
-                _LATB2 = 1;
-            }
-        }
+//        
+//        if(_T4IF)
+//        {
+//            _T4IF = 0;
+//            if(_RB2)
+//            {
+//                _LATB2 = 0;
+//            }
+//            if(_RB2==0)
+//            {
+//                _LATB2 = 1;
+//            }
+//        }
 
       
     }
