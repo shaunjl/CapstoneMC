@@ -9,11 +9,21 @@
 #define SCREW 2
 #define CURVE 3
 
-//set output registers to the LEDs
-#define LED1I        _RB2  
-#define LED1O       _LATB2
-#define LED2I 	     _RB3
-#define LED2O       _LATB3
+//set output registers to the LEDs. R for Red. G for green.
+#define LED1_7R     _LATA7  
+#define LED1_7G     _LATA10
+#define LED2_8R 	_LATB13
+#define LED2_8G     _LATB12
+#define LED3_9R     _LATC7
+#define LED3_9G     _LATC6
+#define LED4_10R    _LATB6
+#define LED4_10G    _LATB5
+#define LED5_11R    _LATA9
+#define LED5_11G    _LATA4
+#define LED6_12R    _LATA3
+#define LED6_12G    _LATA2
+
+
 //set input from charging
 #define CHARGEIN     _RB13
 //set input from buttons

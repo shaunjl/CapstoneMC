@@ -7,22 +7,34 @@ int PITCH;
 void PinConfig(){
     ANSELA = 0; //set all A ports to digital (turn analog off)
     ANSELB = 0; //set all B ports to digital 
+    ANSELC = 0; //set all C ports to digital
 
-    _TRISA0 = 0; //set RA0 to output
-    _TRISA1 = 0; //set RA1 to output
-    _TRISA2 = 0; //set RA2 to output
-    _TRISA3 = 0; //set RA3 to output
-    _TRISB0 = 0; //set RB0 to output
-    _TRISB1 = 0; //set RB1 to output
-    _TRISB2 = 0; //set RB2 to output
-    _TRISB3 = 0; //set RB3 to output
-    _TRISB14 = 1; //set RB14 to input
-    _TRISB15 = 1; //set RB15 to input
+    //LED pins
+    _TRISA2 = 0; 
+    _TRISA3 = 0; 
+    _TRISA4 = 0;
+    _TRISA7 = 0;
+    _TRISA9 = 0;
+    _TRISA10 = 0;
+    _TRISB5 = 0;
+    _TRISB6 = 0;
+    _TRISB12 = 0;
+    _TRISB13 = 0;
+    _TRISC6 = 0;
+    _TRISC7 = 0;
     
-    _CVREN = 0;  // turn off cvref pin to be used for i2c
-    _SPI1MD = 1;  //Turn SCK off to be used for I2C
-    _TRISB8 = 0;  //RB8 as output for I2C
-    _TRISB9 = 0;  //RB9 as output for I2X
+    
+    //_TRISB0 = 0; //set RB0 to output
+    //_TRISB1 = 0; //set RB1 to output
+    //_TRISB2 = 0; //set RB2 to output
+    //_TRISB3 = 0; //set RB3 to output
+    //_TRISB14 = 1; //set RB14 to input
+    //_TRISB15 = 1; //set RB15 to input
+    
+    //_CVREN = 0;  // turn off cvref pin to be used for i2c
+    //_SPI1MD = 1;  //Turn SCK off to be used for I2C
+    //_TRISB8 = 0;  //RB8 as output for I2C
+    //_TRISB9 = 0;  //RB9 as output for I2X
 
 }
 void AnalogConfig(){

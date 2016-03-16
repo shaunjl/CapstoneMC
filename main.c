@@ -22,6 +22,8 @@
 // Select 8 mhz frc clock
 _FOSCSEL(FNOSC_FRC);
 
+_FOSC(OSCIOFNC_ON); //Need to do this so that the pins that LED6 and LED12 are on are i/o pins and not always on.
+
 _FICD(ICS_PGD2 & JTAGEN_OFF) // communicate on PGD2 and turn off JTAGEN so can do i2c1
 _FPOR(ALTI2C1_OFF & ALTI2C2_OFF) //map i2c1 and i2c2 to the right pins
 
@@ -32,7 +34,10 @@ int main()
     extern int A1, A2, A3, A4;
     extern int PITCH;
     
+    
     PinConfig();
+    
+    
     TimerConfig();  
     // I2C Config
     i2c1_init(194); //start up i2c1
@@ -44,6 +49,7 @@ int main()
     Accel2Config(A4, buffer);
     // Initialize to IDLE mode, RISE ball
     PITCH = RISE;
+    
     int state = THROWING; // TODO- change to IDLE
     while(1){
         switch ( state ) {
@@ -73,5 +79,86 @@ int main()
                 break;
             }
     }
+    
+//    while(1){
+//           
+//        
+//        
+//        
+//        
+//            LED6_12G = 0;
+//            LED1_7R = 1;
+//            
+//            Delay(1000);
+//        
+//        
+//       
+//            LED1_7R = 0;
+//            LED1_7G = 1;
+//        
+//            Delay(1000);
+//        
+//        
+//            LED2_8R = 1;
+//            LED1_7G = 0;
+//       
+//            Delay(1000);
+//        
+//        
+//            LED2_8R = 0;
+//            LED2_8G = 1;
+//        
+//            Delay(1000);
+//        
+//        
+//            LED3_9R = 1;
+//            LED2_8G = 0;
+//        
+//            Delay(1000);
+//        
+//        
+//            LED3_9R = 0;
+//            LED3_9G = 1;
+//        
+//            Delay(1000);
+//        
+//              
+//     
+//            LED3_9G = 0;
+//            LED4_10R = 1;
+//        
+//            Delay(1000);
+//        
+//        
+//            LED4_10R = 0;
+//            LED4_10G = 1;
+//        
+//            Delay(1000);
+//        
+//       
+//            LED4_10G = 0;
+//            LED5_11R = 1;
+//        
+//            Delay(1000);
+//        
+//        
+//            LED5_11R = 0;
+//            LED5_11G = 1;
+//       
+//            Delay(1000);
+//        
+//       
+//            LED5_11G = 0;
+//            LED6_12R = 1;
+//        
+//            Delay(1000);
+//        
+//     
+//            LED6_12R = 0;
+//            LED6_12G = 1;
+//          
+//            Delay(1000);
+//        
+//    }
     return (0);
 }
