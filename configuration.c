@@ -2,6 +2,7 @@
 #include "configuration.h"
 
 int PITCH;
+int t1, t2, t3, t4, t5;  //variables that are now like flags since the other way isn't working
 
 // read from the RA and RB bits but write to the LAT bits
 void PinConfig(){
@@ -134,4 +135,35 @@ void AccelTimerConfig(){
     _T4IF = 0; // Clear interrupt flag
     TMR4 = 0; // set timer4 count to 0 initial
     T4CONbits.TON = 1;
+}
+
+//interrupt functions for timers. Make another variable a flag.
+void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
+{
+    _T1IF = 0;
+    t1 = 1;
+}
+
+void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void)
+{
+    _T2IF = 0;
+    t2 = 1;
+}
+
+void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void)
+{
+    _T3IF = 0;
+    t3 = 1;
+}
+
+void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void)
+{
+    _T4IF = 0;
+    t4 = 1;
+}
+
+void __attribute__((interrupt, no_auto_psv)) _T5Interrupt(void)
+{
+    _T5IF = 0;
+    t5 = 1;
 }
