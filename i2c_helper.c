@@ -356,6 +356,7 @@ void i2c2_init(int BRG)
    IFS3bits.MI2C2IF = 0;    // Clear Interrupt
    I2C2CONbits.I2CEN = 1;  // Enable I2C Mode
    temp = I2C2RCV;    // read buffer to clear buffer full
+   Nop();
    reset_i2c2_bus();  // set bus to idle
 }
 

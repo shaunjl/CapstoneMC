@@ -25,7 +25,7 @@ _FOSCSEL(FNOSC_FRC);
 _FOSC(OSCIOFNC_ON); //Need to do this so that the pins that LED6 and LED12 are on are i/o pins and not always on.
 
 _FICD(ICS_PGD2 & JTAGEN_OFF) // communicate on PGD2 and turn off JTAGEN so can do i2c1
-_FPOR(ALTI2C1_OFF & ALTI2C2_OFF) //map i2c1 and i2c2 to the right pins
+_FPOR(ALTI2C1_OFF & ALTI2C2_ON) //map i2c1 and i2c2 to the right pins
 
 char buffer[8]="";
 
@@ -41,10 +41,21 @@ int main()
 //    LED5_11G = 1;
    
     TimerConfig();  
+    InputConfig();
     
     // I2C Config
-    //i2c1_init(194); //start up i2c1
-    //i2c2_init(194); //start up i2c2
+    i2c1_init(10000); //start up i2c1 //was running at 194 before.  I think this is the clock rate, so need it faster...
+    i2c2_init(10000); //start up i2c2
+    
+//    while(1){
+//        LED6_12G = 1;
+//        I2C2requestFrom(A3, 0x0F, 1, buffer);
+//        
+//        if(buffer[0] == 0b00110010)
+//        {
+//            LED1_7R = 1;
+//        }
+//    }
     
     //Accel1Config(A1, buffer); //configures accelerometer on I2C1 line
     //Accel1Config(A2, buffer); //configures accelerometer on I2C1 line
@@ -53,7 +64,7 @@ int main()
     // Initialize to IDLE mode, RISE ball
     PITCH = RISE;
     
-    int state = THROWING; // TODO- change to IDLE
+    int state = PSELECT; // TODO- change to IDLE
     while(1){
         switch ( state ) {
             case IDLE:

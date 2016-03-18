@@ -3,6 +3,7 @@
 
 int PITCH;
 int t1, t2, t3, t4, t5;  //variables that are now like flags since the other way isn't working
+int cn; //CN interrupt
 
 // read from the RA and RB bits but write to the LAT bits
 void PinConfig(){
@@ -24,6 +25,12 @@ void PinConfig(){
     _TRISC6 = 0;
     _TRISC7 = 0;
     
+    //put buttons as inputs
+    _TRISC3 = 1;
+    _TRISC8 = 1;
+    
+    _TRISB4 = 0; //put to output for i2c2?
+    _TRISA8 = 0;
     
     //_TRISB0 = 0; //set RB0 to output
     //_TRISB1 = 0; //set RB1 to output
@@ -103,13 +110,13 @@ void InputConfig(){
     _CNPUB13 = 0; //Disable pull-up resistor
     _CNPDB13 = 0; //Disable pull-down resistor
     // Button 1
-    _CNIEB14 = 1; //Enable Change Notification bit for B14 
-    _CNPUB14 = 0; //Disable pull-up resistor
-    _CNPDB14 = 0; //Disable pull-down resistor
+    _CNIEC3 = 1; //Enable Change Notification bit for B14 
+    _CNPUC3 = 0; //Disable pull-up resistor
+    _CNPDC3 = 0; //Disable pull-down resistor
     // Button 2
-    _CNIEB15 = 1; //Enable Change Notification bit for B15 
-    _CNPUB15 = 0; //Disable pull-up resistor
-    _CNPDB15 = 0; //Disable pull-down resistor
+    _CNIEC8 = 1; //Enable Change Notification bit for B15 
+    _CNPUC8 = 0; //Disable pull-up resistor
+    _CNPDC8 = 0; //Disable pull-down resistor
     _CNIP = 6; // set interrupt priority
     _CNIE = 0; // Enable CN interrupts
     _CNIF = 0; // clear interrupt flag
@@ -166,4 +173,10 @@ void __attribute__((interrupt, no_auto_psv)) _T5Interrupt(void)
 {
     _T5IF = 0;
     t5 = 1;
+}
+
+void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void)
+{
+    _CNIF = 0;
+    cn = 1;
 }

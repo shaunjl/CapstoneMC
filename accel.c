@@ -49,12 +49,12 @@ void Accel1Config(char addr, char* buffer)
 void Accel2Config(char addr, char* buffer)
 {
     I2C2write(addr, 0x20, 0x3F); //configure CTRL_REG1 of accelerometer (normal mode and 1000 Hz rate and all axises on)
-    I2C2requestFrom(addr, 0x20, 1, buffer);
-    while(buffer[0] != 0x3F) //check to make sure it reconfigured if not run again
-    {
-        I2C2write(addr, 0x20, 0x3F); 
-        I2C2requestFrom(addr, 0x20, 1, buffer);
-    }
+//    I2C2requestFrom(addr, 0x20, 1, buffer);
+//    while(buffer[0] != 0x3F) //check to make sure it reconfigured if not run again
+//    {
+//        I2C2write(addr, 0x20, 0x3F); 
+//        I2C2requestFrom(addr, 0x20, 1, buffer);
+//    }
     
     I2C2write(addr, 0x23, 0x10); //configure CTRL_REG4 of accelerometer (Full-scale range (200g))
     I2C2requestFrom(addr, 0x23, 1, buffer); //check to make sure it configured, if not run again

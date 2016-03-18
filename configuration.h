@@ -27,8 +27,8 @@
 //set input from charging
 #define CHARGEIN     _RB13
 //set input from buttons
-#define BUT1IN       _RB14
-#define BUT2IN       _RB15
+#define BUT1IN       _RC3
+#define BUT2IN       _RC8
 
 // Define all states
 #define IDLE          0
