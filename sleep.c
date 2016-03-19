@@ -28,8 +28,8 @@ int sleep(void) {
         if(cn)
         {
             cn = 0;
-            // check charging
-            if (BUT1IN == 0){
+            // check charging- TODO- change to go to charging on charging interrupt
+            if (BUT1INOFF == 0){
                 return CHARGING;
             }
         }

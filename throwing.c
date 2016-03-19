@@ -143,16 +143,3 @@ int binTwosComplementToSignedDecimal(char binary[],int significantBits)
 
     return sum;
 }
-
-//void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void)
-//{
-//    _T4IF = 0;
-//            if(_RB2)
-//            {
-//                _LATB2 = 0;
-//            }
-//            if(_RB2==0)
-//            {
-//                _LATB2 = 1;
-//            }
-//}
