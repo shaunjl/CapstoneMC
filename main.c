@@ -57,14 +57,14 @@ int main()
 //        }
 //    }
     
-    //Accel1Config(A1, buffer); //configures accelerometer on I2C1 line
-    //Accel1Config(A2, buffer); //configures accelerometer on I2C1 line
+    Accel1Config(A1, buffer); //configures accelerometer on I2C1 line
+    Accel1Config(A2, buffer); //configures accelerometer on I2C1 line
     //Accel2Config(A3, buffer); 
     //Accel2Config(A4, buffer);
     // Initialize to IDLE mode, RISE ball
     PITCH = RISE;
     
-    int state = PSELECT; // TODO- change to IDLE
+    int state = THROWING; // TODO- change to IDLE
     while(1){
         switch ( state ) {
             case IDLE:

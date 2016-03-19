@@ -36,7 +36,7 @@ int throwing(void) {
     // Zero all vals
     zeroVals();
     
-    _LATB2 = 1;
+  
     
     AccelTimerConfig();
     
@@ -70,20 +70,25 @@ int throwing(void) {
         A2y = -1*ReadY1(A2, buffer);  //read y axis of accelerometer 2
         A2z = -1*ReadZ1(A2, buffer);  //read z axis of accelerometer 2
 
-        A3x = ReadX2(A3, buffer);  //read x axis of accelerometer 3
-        A3y = -1*ReadY2(A3, buffer);  //read y axis of accelerometer 3
-        A3z = -1*ReadZ2(A3, buffer);  //read z axis of accelerometer 3
+        //A3x = ReadX2(A3, buffer);  //read x axis of accelerometer 3
+        //A3y = -1*ReadY2(A3, buffer);  //read y axis of accelerometer 3
+        //A3z = -1*ReadZ2(A3, buffer);  //read z axis of accelerometer 3
 
-        A4x = ReadX2(A4, buffer);  //read x axis of accelerometer 4
-        A4y = -1*ReadY2(A4, buffer);  //read y axis of accelerometer 4
-        A4z = -1*ReadZ2(A4, buffer);  //read z axis of accelerometer 4
+        //A4x = ReadX2(A4, buffer);  //read x axis of accelerometer 4
+        //A4y = -1*ReadY2(A4, buffer);  //read y axis of accelerometer 4
+        //A4z = -1*ReadZ2(A4, buffer);  //read z axis of accelerometer 4
         
-        A0x = (A1x+A2x+A3x+A4x)/4.0;
-        A0y = (A1y+A2y+A3y+A4y)/4.0;
-        A0z = (A1z+A2z+A3z+A4z)/4.0;
+        A0x = (A1x+A2x)/2.0;
+        A0y = (A1y+A2y)/2.0;
+        A0z = (A1z+A2z)/2.0;
         
-        alphaz = (.015*(A1y-A0y) + .015*(A4x - A0x))/(.00045);
         
+//        A0x = (A1x+A2x+A3x+A4x)/4.0;
+//        A0y = (A1y+A2y+A3y+A4y)/4.0;
+//        A0z = (A1z+A2z+A3z+A4z)/4.0;
+        
+//        alphaz = (.015*(A1y-A0y) + .015*(A4x - A0x))/(.00045);
+        alphaz = .001;
         alphax = -1*(A0z-A2z+wy*wz*.015)/.015;
         alphay = (A0z-A1z+wx*wz*.015)/.015;
         
@@ -92,7 +97,7 @@ int throwing(void) {
         wx = wx + alphax*timestep;
         wy = wy + alphay*timestep;
         wz = wz + alphaz*timestep;
-        
+        Nop();
         
 //        
 //        if(_T4IF)

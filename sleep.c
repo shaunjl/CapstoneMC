@@ -17,25 +17,30 @@
  */
 int sleep(void) {
     
+    extern int cn;
     float accel_threshold = 5.0; // TODO- change
+    
+    _CNIE = 1; //turn on cn interrupts
     
     while(1){
         // CHARGING
         // go to charging on charging pin
-        if(_CNIF)
+        if(cn)
         {
-            _CNIF = 0;
+            cn = 0;
             // check charging
-            if (CHARGEIN){
-                return 3;
+            if (BUT1IN == 0){
+                return CHARGING;
             }
         }
         // IDLE
         char buffer[8]="";
-        float * data = GetAccelData(buffer);
-        float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0;
-        if (avg >= accel_threshold)
-            return 0;
+        
+//TO ADD IN WHEN GET ALL ACCELEROMETERS WORKING
+        //float * data = GetAccelData(buffer);
+        //float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0;
+        //if (avg >= accel_threshold)
+            //return 0;
     }
     
     return 0;

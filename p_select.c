@@ -24,7 +24,7 @@ int p_select(void) {
     _T3IF = 0;
     _T3IE = 1;
     T3CONbits.TON = 1;
-    _CNIE = 1;
+    _CNIE = 1; //enables cn interrupt
     
     while(1){
         
@@ -46,8 +46,12 @@ int p_select(void) {
             {
                 // TODO - get phi, phi, theta values
                 // depending on orientation of ball set PITCH
-                LED6_12R = 1;
-                return 0;
+                LED6_12R = 0;
+                LED6_12G = 1;
+                Delay(1000);
+                LED6_12G = 0;
+                _CNIE = 0; //turn off interrupt
+                return IDLE;
             }
             
         }
