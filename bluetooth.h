@@ -11,6 +11,7 @@
 #include <xc.h> // include processor files - each processor file is guarded. 
 
 void uartConfig(void);
+void uartConfig2(void);
 void uartPutChar(char ch);
 char uartGetChar();
 

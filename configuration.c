@@ -32,6 +32,12 @@ void PinConfig(){
     _TRISB4 = 0; //put to output for i2c2?
     _TRISA8 = 0;
     
+    //Config for bluetooth
+    //_TRISC2 = 0; // ready to send - don't need to configure
+    _TRISB2 = 1; // clear to send
+    _TRISB3 = 1; // U1RX
+    _TRISC1 = 0; // U1TX 
+    
     //_TRISB0 = 0; //set RB0 to output
     //_TRISB1 = 0; //set RB1 to output
     //_TRISB2 = 0; //set RB2 to output
