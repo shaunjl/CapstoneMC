@@ -30,16 +30,19 @@ int idle(void) {
     TMR2 = 0; // set count to 0
     T2CONbits.TON = 1; // turn timer2 on
     int num_seconds = 0;
+    t2 = 0;
     
     //timer1 for pitch selection
     extern int t1;
     _T1IF = 0;
     _T1IE = 1;
     TMR1 = 0; // set count to 0
+    t1 = 0;
     
     //enable change notification 
     extern int cn;
     _CNIE = 1; //enables cn interrupt
+    _CNIF = 0; // clear interrupt flag
     
     void stop_interrupts()
     {
@@ -63,7 +66,6 @@ int idle(void) {
     
     while(1)
     {
-        uartPutChar('a');
         // SLEEP
         // go to sleep if no other mode selected after 5 minutes
         if(t2){
@@ -72,7 +74,7 @@ int idle(void) {
         }
         if(num_seconds >= 300){
             stop_interrupts();
-            return SLEEP; // go to sleep mode
+            return SLEEP; // go to sleep mode0
         }
         
         // PITCH SELECTION AND CHARGING
@@ -95,6 +97,7 @@ int idle(void) {
         }
         //if timer1 hits 3 seconds go to pitch selection
         if(t1){
+           t1 = 0;
            stop_interrupts();
            return PSELECT; 
         }

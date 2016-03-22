@@ -25,6 +25,7 @@ int p_select(void) {
     _T3IE = 1;
     T3CONbits.TON = 1;
     
+    _CNIF = 0; // clear the cn flag
     _CNIE = 1; //enables cn interrupt
     
     while(1){
@@ -52,7 +53,6 @@ int p_select(void) {
                 LED6_12G = 0;
                 T3CONbits.TON = 0;
                 TMR3 = 0;
-                _T3IF = 0;
                 _T3IE = 0;
                 _CNIE = 0;
                 return IDLE;

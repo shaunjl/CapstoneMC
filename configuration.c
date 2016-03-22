@@ -112,9 +112,9 @@ void TimerConfig(){
 
 void InputConfig(){
     // Charging Pin
-    _CNIEB13 = 1; //Enable Change Notification bit for B13 
-    _CNPUB13 = 0; //Disable pull-up resistor
-    _CNPDB13 = 0; //Disable pull-down resistor
+//    _CNIEB13 = 1; //Enable Change Notification bit for B13 
+//    _CNPUB13 = 0; //Disable pull-up resistor
+//    _CNPDB13 = 0; //Disable pull-down resistor
     // Button 1
     _CNIEC3 = 1; //Enable Change Notification bit for B14 
     _CNPUC3 = 0; //Disable pull-up resistor
@@ -124,7 +124,7 @@ void InputConfig(){
     _CNPUC8 = 0; //Disable pull-up resistor
     _CNPDC8 = 0; //Disable pull-down resistor
     _CNIP = 6; // set interrupt priority
-    _CNIE = 0; // Enable CN interrupts
+    _CNIE = 0; // Disable CN interrupts
     _CNIF = 0; // clear interrupt flag
     
 }
