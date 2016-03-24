@@ -52,6 +52,49 @@ void PinConfig(){
 
 }
 void AnalogConfig(){
+    _ADON = 0;    // AD1CON1<15> -- Turn off A/D
+
+    
+    // AD1CON1 register
+    _AD12B = 1; //12-bit A/D operation
+    _FORM = 0;    // AD1CON1<9:8> -- Unsigned integer output
+    _SSRC = 7;    // AD1CON1<7:4> -- Auto conversion
+			  // (internal counter)
+    _ASAM = 1;    // AD1CON1<2> -- Auto sampling
+    _ADSIDL = 0;  // AD1CON1<13> -- A/D continues in idle mode
+
+    // AD1CON2 register
+    _VCFG = 0;   // AD1CON2<15:13> -- Use VDD as positive
+                  // ref voltage and VSS as negative ref voltage
+
+    _ALTS = 0;
+    
+    //need to be one if measuring from more than 1 input; 0 if only 1.  
+    _CSCNA = 1;   // AD1CON2<10> -- Scans inputs
+                  // specified in AD1CSSx registers  -- Selecting '0' here
+                  // makes writing to the AD1CSSL
+                  // register unnecessary.
+    
+    //Needs to be a couple more than how many analog ports we are reading in from
+    _SMPI = 3;	  // AD1CON2<6:2> -- every 4th conversion sent to buffer
+    _ALTS = 0;    // AD1CON2<0> -- Sample MUXA only
+
+    //If it is scanning, need to specify which ports (if have multiple analog inputs).
+    _CSS0 = 1;  //Turns on AN0
+    //_CSS12 = 1; //Turns on AN12
+    
+    // AD1CON3 register
+    _ADRC = 0;    // AD1CON3<15> -- Use system clock
+    _SAMC = 0;    // AD1CON3<12:8> -- Auto sample every A/D
+                  // period TAD
+    _ADCS = 0x3F; // AD1CON3<7:0> -- A/D period TAD = 64*TCY
+
+    // AD1CHS register
+    _CH0NA = 0;   // AD1CHS<7:5> -- Use VDD as negative input
+    _CH0SA = 0b01100; // AD1CHS<4:0> -- Use ANX as positive input
+
+
+    _ADON = 1;    // AD1CON1<15> -- Turn on A/D
     
 }
 

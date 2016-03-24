@@ -2,6 +2,12 @@
 
 void uartConfig(void)
 {
+    // new config
+    _UARTEN = 1; // UART enable bit
+    _USIDL = 0; // dont discontinue module operation when device in idle mode
+    
+    
+    // OLD config
     U1BRG = 25;                     //Baud rate set to 9600
     IPC2bits.U1RXIP = 4;            //interrupt priority level for receive
     IPC3bits.U1TXIP = 4;            //interrupt ptiority level for transmit
