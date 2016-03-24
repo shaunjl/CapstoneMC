@@ -21,6 +21,7 @@ int sleep(void) {
     float accel_threshold = 5.0; // TODO- change
     
     _CNIE = 1; //turn on cn interrupts
+    cn = 0;
     
     while(1){
         // CHARGING
@@ -30,6 +31,7 @@ int sleep(void) {
             cn = 0;
             // check charging- TODO- change to go to charging on charging interrupt
             if (BUT1INOFF == 0){
+                _CNIE = 0; //turn off cn interrupts
                 return CHARGING;
             }
         }

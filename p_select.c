@@ -54,6 +54,7 @@ int p_select(void) {
                 T3CONbits.TON = 0;
                 TMR3 = 0;
                 _T3IE = 0;
+                t3 = 0;
                 _CNIE = 0;
                 return IDLE;
             }
