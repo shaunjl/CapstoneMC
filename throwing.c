@@ -41,25 +41,6 @@ int throwing(void) {
     AccelTimerConfig();
     
     while(1){
-        //int l[8];
-        //l[0] = 1;
-        //l[1] = 1;
-        //l[2] = 1;
-        //l[3] = 1;
-        //l[4] = 1;
-        //l[5] = 1;
-        //l[6] = 1;
-        //l[7] = 0;
-        
-        //w = -1*l[0]*pow(2,7)+l[1]*pow(2,6)+l[2]*pow(2,5)+l[3]*pow(2,4)+l[4]*pow(2,3)+l[5]*pow(2,2)+l[6]*pow(2,1)+l[7]*pow(2,0);
-        
-        //l = 0xFE;
-        //l = ~l;
-        //l = l+1;
-        //l = -l;
-        //l = 0xFE;
-        
-        //w = binTwosComplementToSignedDecimal(l,8);
         
         //read data from accelerometers and put into correct global axes
         A1x = ReadX1(A1, buffer); //read x axis of accelerometer 1
@@ -70,35 +51,29 @@ int throwing(void) {
         A2y = -1*ReadY1(A2, buffer);  //read y axis of accelerometer 2
         A2z = -1*ReadZ1(A2, buffer);  //read z axis of accelerometer 2
 
-        //A3x = ReadX2(A3, buffer);  //read x axis of accelerometer 3
-        //A3y = -1*ReadY2(A3, buffer);  //read y axis of accelerometer 3
-        //A3z = -1*ReadZ2(A3, buffer);  //read z axis of accelerometer 3
+        A3x = ReadX2(A3, buffer);  //read x axis of accelerometer 3
+        A3y = -1*ReadY2(A3, buffer);  //read y axis of accelerometer 3
+        A3z = -1*ReadZ2(A3, buffer);  //read z axis of accelerometer 3
 
-        //A4x = ReadX2(A4, buffer);  //read x axis of accelerometer 4
-        //A4y = -1*ReadY2(A4, buffer);  //read y axis of accelerometer 4
-        //A4z = -1*ReadZ2(A4, buffer);  //read z axis of accelerometer 4
+        A4x = ReadX2(A4, buffer);  //read x axis of accelerometer 4
+        A4y = -1*ReadY2(A4, buffer);  //read y axis of accelerometer 4
+        A4z = -1*ReadZ2(A4, buffer);  //read z axis of accelerometer 4
         
-        A0x = (A1x+A2x)/2.0;
-        A0y = (A1y+A2y)/2.0;
-        A0z = (A1z+A2z)/2.0;
+        A0x = (A1x+A2x+A3x+A4x)/4.0; //find balls x-acceleration in its own frame
+        A0y = (A1y+A2y+A3y+A4y)/4.0; //find balls y-acceleration in its own frame
+        A0z = (A1z+A2z+A3z+A4z)/4.0; //find balls z-acceleration in its own frame
         
-        
-//        A0x = (A1x+A2x+A3x+A4x)/4.0;
-//        A0y = (A1y+A2y+A3y+A4y)/4.0;
-//        A0z = (A1z+A2z+A3z+A4z)/4.0;
-        
-//        alphaz = (.015*(A1y-A0y) + .015*(A4x - A0x))/(.00045);
-        alphaz = .001;
-        alphax = -1*(A0z-A2z+wy*wz*.015)/.015;
-        alphay = (A0z-A1z+wx*wz*.015)/.015;
+               
+        alphaz = (.015*(A1y-A0y) + .015*(A4x - A0x))/(.00045); //calculate angular acceleration about the ball's z-axis
+        alphax = -1*(A0z-A2z+wy*wz*.015)/.015;  //calculate angular acceleration about the ball's x-axis (numerically)
+        alphay = (A0z-A1z+wx*wz*.015)/.015;  //calculate angular acceleration about the ball's y-axis (numerically)
         
         
         
-        wx = wx + alphax*timestep;
-        wy = wy + alphay*timestep;
-        wz = wz + alphaz*timestep;
-        Nop();
-        
+        wx = wx + alphax*timestep;  //calculate angular velocity about ball's x-axis (numerically)
+        wy = wy + alphay*timestep;  //calculate angular velocity about ball's y-axis (numerically)
+        wz = wz + alphaz*timestep;  //calculate angular velocity about ball's z-axis (numerically)
+                
 //        
 //        if(_T4IF)
 //        {
