@@ -30,6 +30,8 @@ int throwing(void) {
     
     float lx,ly, led_angle; //used to determine which leds to light up
     float w; //for angular velocity magnitude
+    float alpha_range_good = .17;
+    float alpha_range_ok = .35;
     
     //depending on the pitch set the value of the angular velocity thresholds
     float w_good, w_ok;
@@ -96,7 +98,7 @@ int throwing(void) {
             A0x = (A1x+A2x+A3x+A4x)/4.0; //find balls x-acceleration in its own frame
             A0y = (A1y+A2y+A3y+A4y)/4.0; //find balls y-acceleration in its own frame
             A0z = (A1z+A2z+A3z+A4z)/4.0; //find balls z-acceleration in its own frame
-
+           
             if ((A0x > 2*9.81 || A0x < -2*9.81) || (A0y > 2*9.81 || A0y < -2*9.81) || (A0z > 2*9.81 || A0z < -2*9.81)) 
             {
                 alphaz = (.015*(A1y-A0y) + .015*(A4x - A0x))/(.00045); //calculate angular acceleration about the ball's z-axis
@@ -111,6 +113,63 @@ int throwing(void) {
                 
                 w =  sqrt(powf(wx,2.0) + powf(wy,2.0) + powf(wz,2.0));
 
+                
+                phidot = wx + sin(phi)*tan(theta)*wy + cos(phi)*tan(theta)*wz; //calculate how phi is changing in time
+                thetadot = cos(phi)*wy - sin(phi)*wz; //calculate how theta is changing in time
+                psidot = sin(phi)/cos(theta)*wy + cos(phi)/cos(theta)*wz; //calculate how psi is changing in time
+
+                theta = theta + thetadot*timestep; //calculate pitch
+                phi = phi + phidot*timestep; //calculate roll
+                psi = psi + psidot*timestep; //calculate yaw
+
+                A0xi = A0x + sin(phi)*tan(theta)*A0y + cos(phi)*tan(theta)*A0z; //calculate acceleration in world x-frame
+                A0yi = cos(phi)*A0y - sin(phi)*A0z; //calculate acceleration in world y-frame
+                A0zi = sin(phi)/cos(theta)*A0y + cos(phi)/cos(theta)*A0z; //need to add in acceleration from gravity.  //calculate acceleration in world z-frame
+
+                V0xi = V0xi + A0xi*timestep;  //calculate velocity in world x-frame
+                V0yi = V0yi + A0yi*timestep;  //calculate velocity in world y-frame
+                V0zi = V0zi + A0zi*timestep;  //calculate velocity in world z-frame
+                
+                
+                // Find angle relative to expected
+                
+                //depending on the pitch set the value of the correct theta and psi in world frame
+                float theta_right, psi_right;
+
+                if (PITCH == RISE)
+                {
+                    theta_right = atan2(V0yi, V0xi) + PI/2;
+                    psi_right = 0;
+                }
+                else if (PITCH == DROP)
+                {
+                    theta_right = atan2(V0yi, V0xi) - PI/2;
+                    psi_right = 0; 
+                }
+                else if (PITCH == CURVE)
+                {
+                    theta_right = atan2(V0yi, V0xi) + PI/2;
+                    psi_right = 3*PI/4;
+                }
+                else if (PITCH == SCREW)
+                {
+                    theta_right = atan2(V0yi, V0xi) - PI/2;
+                    psi_right = PI/4;
+                }
+                
+                // unit vector for ideal
+                wxideal = cos(theta_right)*sin(psi_right);
+                wyideal = sin(theta_right)*sin(psi_right);
+                wzideal = cos(psi_right);
+                
+                //w in world frame
+                wxi = cos(theta)*cos(psi)*wx + (sin(phi)*sin(theta)*cos(psi) - cos(phi)*sin(psi))*wy + (cos(phi)*sin(theta)*cos(psi)+sin(phi)*sin(psi))*wz;
+                wyi = cos(theta)*sin(psi)*wx + (sin(phi)*sin(theta)*sin(psi) + cos(phi)*cos(psi))*wy + (cos(phi)*sin(theta)*sin(psi) - sin(phi)*cos(psi))*wz;
+                wzi = -sin(theta)*wx + sin(phi)*cos(theta)*wy + cos(phi)*cos(theta)*wz;  
+                
+                // find angle between two vectors
+                alpha = abs(acos((wxideal*wxi + wyideal*wyi + wzideal*wzi)/ w));
+                
                 //calculate which LEDs to light up by projecting the spin axis onto the x-y plane
                 if(wy!=0) //if it is equal to zero then there will be a singularity and so we have to calculate it another way
                 {
@@ -132,12 +191,12 @@ int throwing(void) {
                         LED5_11R = 0;
                         LED6_12G = 0;
                         LED6_12R = 0;
-                        if (w >= w_good)
+                        if (w >= w_good && alpha < alpha_range_good)
                         {
                             LED4_10G = 1;
                             LED4_10R = 0;
                         }
-                        else if (w >= w_ok)
+                        else if (w >= w_good && alpha < alpha_range_ok)
                         {
                             LED4_10R = 1;
                             LED4_10G = 1;
@@ -163,12 +222,12 @@ int throwing(void) {
                         LED6_12G = 0;
                         LED6_12R = 0;
                         
-                        if (w >= w_good)
+                        if (w >= w_good && alpha < alpha_range_good)
                         {
                             LED5_11G = 1;
                             LED5_11R = 0;
                         }
-                        else if (w >= w_ok)
+                        else if (w >= w_good && alpha < alpha_range_ok)
                         {
                             LED5_11R = 1;
                             LED5_11G = 1;
@@ -192,12 +251,12 @@ int throwing(void) {
                         LED4_10G = 0;
                         LED5_11G = 0;
                         LED5_11R = 0;
-                        if (w >= w_good)
+                        if (w >= w_good && alpha < alpha_range_good)
                         {
                             LED6_12G = 1;
                             LED6_12R = 0;
                         }
-                        else if (w >= w_ok)
+                        else if (w >= w_good && alpha < alpha_range_ok)
                         {
                             LED6_12R = 1;
                             LED6_12G = 1;
@@ -221,12 +280,12 @@ int throwing(void) {
                         LED5_11R = 0;
                         LED6_12G = 0;
                         LED6_12R = 0;
-                        if (w >= w_good)
+                        if (w >= w_good && alpha < alpha_range_good)
                         {
                             LED1_7G = 1;
                             LED1_7R = 0;
                         }
-                        else if (w >= w_ok)
+                        else if (w >= w_good && alpha < alpha_range_ok)
                         {
                             LED1_7R = 1;
                             LED1_7G = 1;
@@ -250,12 +309,12 @@ int throwing(void) {
                         LED5_11R = 0;
                         LED6_12G = 0;
                         LED6_12R = 0;
-                        if (w >= w_good)
+                        if (w >= w_good && alpha < alpha_range_good)
                         {
                             LED2_8G = 1;
                             LED2_8R = 0;
                         }
-                        else if (w >= w_ok)
+                        else if (w >= w_good && alpha < alpha_range_ok)
                         {
                             LED2_8R = 1;
                             LED2_8G = 1;
@@ -279,12 +338,12 @@ int throwing(void) {
                         LED5_11R = 0;
                         LED6_12G = 0;
                         LED6_12R = 0;
-                        if (w >= w_good)
+                        if (w >= w_good && alpha < alpha_range_good)
                         {
                             LED3_9G = 1;
                             LED3_9R = 0;
                         }
-                        else if (w >= w_ok)
+                        else if (w >= w_good && alpha < alpha_range_ok)
                         {
                             LED3_9R = 1;
                             LED3_9G = 1;
@@ -308,12 +367,12 @@ int throwing(void) {
                     LED5_11R = 0;
                     LED6_12G = 0;
                     LED6_12R = 0;
-                    if (w >= w_good)
+                    if (w >= w_good && alpha < alpha_range_good)
                         {
                             LED1_7G = 1;
                             LED1_7R = 0;
                         }
-                        else if (w >= w_ok)
+                        else if (w >= w_good && alpha < alpha_range_ok)
                         {
                             LED1_7R = 1;
                             LED1_7G = 1;
@@ -325,23 +384,6 @@ int throwing(void) {
                         }
                     }
 
-
-
-                phidot = wx + sin(phi)*tan(theta)*wy + cos(phi)*tan(theta)*wz; //calculate how phi is changing in time
-                thetadot = cos(phi)*wy - sin(phi)*wz; //calculate how theta is changing in time
-                psidot = sin(phi)/cos(theta)*wy + cos(phi)/cos(theta)*wz; //calculate how psi is changing in time
-
-                theta = theta + thetadot*timestep; //calculate pitch
-                phi = phi + phidot*timestep; //calculate roll
-                psi = psi + psidot*timestep; //calculate yaw
-
-                A0xi = A0x + sin(phi)*tan(theta)*A0y + cos(phi)*tan(theta)*A0z; //calculate acceleration in world x-frame
-                A0yi = cos(phi)*A0y - sin(phi)*A0z; //calculate acceleration in world y-frame
-                A0zi = sin(phi)/cos(theta)*A0y + cos(phi)/cos(theta)*A0z; //need to add in acceleration from gravity.  //calculate acceleration in world z-frame
-
-                V0xi = V0xi + A0xi*timestep;  //calculate velocity in world x-frame
-                V0yi = V0yi + A0yi*timestep;  //calculate velocity in world y-frame
-                V0zi = V0zi + A0zi*timestep;  //calculate velocity in world z-frame
             }
         
        
