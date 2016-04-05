@@ -39,6 +39,9 @@
 #define APPCONFIG     5
 #define PAIRING       6
 
+//define PI for later use
+#define PI            3.14159265359
+
 void PinConfig();
 void AnalogConfig();
 void TimerConfig();

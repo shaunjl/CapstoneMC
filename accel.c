@@ -18,8 +18,8 @@ int A2 = 0b00110000; //define address for accelerometer 2 (positive y-axis)
 int A3 = 0b00110010; //define address for accelerometer 3 (negative x-axis)
 int A4 = 0b00110000; //define address for accelerometer 4 (negative y-axis)
 
-int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,A1x,A1y,A1z,A2x,A2y,A2z,A3x,A3y,A3z,A4x,A4y,A4z;
-float A0x,A0y,A0z, alphax, alphay, alphaz, wx, wy, wz, psi, phi, theta, psidot, phidot, thetadot;
+int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,A1x,A1y,A1z,A2x,A2y,A2z,A3x,A3y,A3z,A4x,A4y,A4z, newdata_1, newdata_2, newdata_3, newdata_4;
+float A0x,A0y,A0z,A0xi,A0yi,A0zi,V0xi,V0yi,V0zi, alphax, alphay, alphaz, wx, wy, wz, psi, phi, theta, psidot, phidot, thetadot;
 
 // Accel. 1 & 2 are on bus line 1, 3 & 4 are on bus line 2
 // Accel. 1 & 2 are on x, y axis, Accel. 3 & 4 on -x, -y
@@ -71,7 +71,7 @@ int ReadX1(char addr, char* buffer)
 {
     int x;
     I2C1requestFrom(addr, 0x29, 1, buffer);
-    x = buffer[0];
+    x = 9.81*buffer[0];
     
     return(x);
 }
@@ -80,7 +80,7 @@ int ReadY1(char addr, char* buffer)
 {
     int y;
     I2C1requestFrom(addr, 0x2B, 1, buffer);
-    y = buffer[0];
+    y = 9.81*buffer[0];
     
     return(y);
 }
@@ -89,7 +89,7 @@ int ReadZ1(char addr, char* buffer)
 {
     int z;
     I2C1requestFrom(addr, 0x2D, 1, buffer);
-    z = buffer[0];
+    z = 9.81*buffer[0];
     
     return(z);
 }
@@ -98,7 +98,7 @@ int ReadX2(char addr, char* buffer)
 {
     int x;
     I2C2requestFrom(addr, 0x29, 1, buffer);
-    x = buffer[0];
+    x = 9.81*buffer[0];
     
     return(x);
 }
@@ -107,7 +107,7 @@ int ReadY2(char addr, char* buffer)
 {
     int y;
     I2C2requestFrom(addr, 0x2B, 1, buffer);
-    y = buffer[0];
+    y = 9.81*buffer[0];
     
     return(y);
 }
@@ -116,7 +116,7 @@ int ReadZ2(char addr, char* buffer)
 {
     int z;
     I2C2requestFrom(addr, 0x2D, 1, buffer);
-    z = buffer[0];
+    z = 9.81*buffer[0];
     
     return(z);
 }
