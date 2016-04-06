@@ -38,11 +38,11 @@ int sleep(void) {
         // IDLE
         char buffer[8]="";
         
-//TO ADD IN WHEN GET ALL ACCELEROMETERS WORKING
-        //float * data = GetAccelData(buffer);
-        //float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0;
-        //if (avg >= accel_threshold)
-            //return 0;
+        //TO ADD IN WHEN GET ALL ACCELEROMETERS WORKING
+        float * data = GetAccelData(buffer);
+        float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0;
+        if (avg >= accel_threshold)
+            return 0;
     }
     
     return 0;

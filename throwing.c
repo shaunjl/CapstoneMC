@@ -158,17 +158,17 @@ int throwing(void) {
                 }
                 
                 // unit vector for ideal
-                wxideal = cos(theta_right)*sin(psi_right);
-                wyideal = sin(theta_right)*sin(psi_right);
-                wzideal = cos(psi_right);
+                float wxideal = cos(theta_right)*sin(psi_right);
+                float wyideal = sin(theta_right)*sin(psi_right);
+                float wzideal = cos(psi_right);
                 
                 //w in world frame
-                wxi = cos(theta)*cos(psi)*wx + (sin(phi)*sin(theta)*cos(psi) - cos(phi)*sin(psi))*wy + (cos(phi)*sin(theta)*cos(psi)+sin(phi)*sin(psi))*wz;
-                wyi = cos(theta)*sin(psi)*wx + (sin(phi)*sin(theta)*sin(psi) + cos(phi)*cos(psi))*wy + (cos(phi)*sin(theta)*sin(psi) - sin(phi)*cos(psi))*wz;
-                wzi = -sin(theta)*wx + sin(phi)*cos(theta)*wy + cos(phi)*cos(theta)*wz;  
+                float wxi = cos(theta)*cos(psi)*wx + (sin(phi)*sin(theta)*cos(psi) - cos(phi)*sin(psi))*wy + (cos(phi)*sin(theta)*cos(psi)+sin(phi)*sin(psi))*wz;
+                float wyi = cos(theta)*sin(psi)*wx + (sin(phi)*sin(theta)*sin(psi) + cos(phi)*cos(psi))*wy + (cos(phi)*sin(theta)*sin(psi) - sin(phi)*cos(psi))*wz;
+                float wzi = -sin(theta)*wx + sin(phi)*cos(theta)*wy + cos(phi)*cos(theta)*wz;  
                 
                 // find angle between two vectors
-                alpha = abs(acos((wxideal*wxi + wyideal*wyi + wzideal*wzi)/ w));
+                float alpha = abs(acos((wxideal*wxi + wyideal*wyi + wzideal*wzi)/ w));
                 
                 //calculate which LEDs to light up by projecting the spin axis onto the x-y plane
                 if(wy!=0) //if it is equal to zero then there will be a singularity and so we have to calculate it another way

@@ -20,7 +20,7 @@ int idle(void) {
     extern int w,x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,A1x,A1y,A1z,A2x,A2y,A2z,A3x,A3y,A3z,A4x,A4y,A4z;
     extern float A0x,A0y,A0z, alphax, alphay, alphaz, wx, wy, wz, psi, phi, theta, psidot, phidot, thetadot;
     
-    float accel_threshold = 5.0; // TODO- change
+    float accel_threshold = 7.0; // TODO- change
     
     //timer2 for sleep mode - if any other interrupt then reset
     //button, timer for sleep mode - if pressed for multiple seconds then sleep mode
@@ -106,11 +106,11 @@ int idle(void) {
 
       
         // THROWING
-//        char buffer[8]="";
-//        float * data = GetAccelData(buffer);
-//        float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0;
-//        if (avg >= accel_threshold)
-//            return THROWING;
+        char buffer[8]="";
+        float * data = GetAccelData(buffer);
+        float avg = (pow(data[0],2.0)+pow(data[1],2.0)+pow(data[2],2.0))/3.0;
+        if (avg >= accel_threshold)
+            return THROWING;
         
         
     }   
