@@ -17,7 +17,6 @@
 #include "charging.h"
 #include "p_select.h"
 #include "app_config.h"
-#include "pairing.h"
 
 // Select 8 mhz frc clock
 _FOSCSEL(FNOSC_FRC);
@@ -93,9 +92,6 @@ int main()
                 break;
             case APPCONFIG:
                 state = app_config();
-                break;
-            case PAIRING:
-                state = pairing();
                 break;
             default:
                 state = idle();
